@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact - Postify</title>
+  <style>
+    /* Root variables */
+    :root {
+      --primary-color: #5B46D8; /* Purple */
+    }
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #e8ecff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #000;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .background-shape {
+    position: absolute;
+    border: 10px solid #97a0ff;
+    border-radius: 999px;
+    z-index: -1;
+}
+.shape1 { top: -50px; left: -80px; width: 200px; height: 100px; transform: rotate(45deg); }
+.shape2 { top: 300px; left: -120px; width: 300px; height: 150px; transform: rotate(45deg); }
+.shape3 { top: 650px; left: -60px; width: 150px; height: 75px; transform: rotate(45deg); }
+.shape4 { top: 100px; right: -80px; width: 200px; height: 100px; transform: rotate(45deg); }
+.shape5 { top: 400px; right: -100px; width: 250px; height: 125px; transform: rotate(45deg); }
+.shape6 { top: 700px; right: -50px; width: 120px; height: 60px; transform: rotate(45deg); }
+
+    /* Navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-purple);
+}
+
+
+.search-btn-mobile {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.search-btn:hover,
+.search-btn-mobile:hover {
+    color: var(--gray-900);
+}
+
+.mobile-menu {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-btn span {
+    width: 1rem;
+    height: 2px;
+    background: var(--gray-600);
+    margin-bottom: 2px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover span {
+    background: var(--gray-900);
+}
+    /* Main container */
+    main {
+      background: #fff;
+      margin: 165px 20px;
+      max-width: 1100px;
+      width: 100%;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(91, 70, 216, 0.2);
+      padding: 60px 60px;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+
+      /* Important for absolute circles */
+      position: relative;
+      overflow: hidden;
+      z-index: 10; /* Above circles */
+    }
+
+    /* Left side with image */
+    .image-container {
+      flex: 1 1 320px;
+      max-width: 320px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      z-index: 11;
+    }
+
+    .image-container::before {
+      content: '';
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      background-color: var(--primary-color);
+      border-radius: 55% 45% 55% 45% / 60% 40% 60% 40%;
+      filter: drop-shadow(0 10px 10px rgba(37, 0, 245, 0.2));
+      z-index: 0;
+    }
+
+    .image-container img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 55% 45% 55% 45% / 60% 40% 60% 40%;
+      z-index: 1;
+      box-shadow: 0 8px 25px rgba(91, 70, 216, 0.3);
+    }
+
+    /* Right side form */
+    .contact-form {
+      flex: 1 1 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 11;
+    }
+
+    .contact-form h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .contact-form h1 .highlight {
+      color: var(--primary-color);
+    }
+
+    .contact-form label {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 12px;
+      border: 2px solid #ddd;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+      font-family: inherit;
+    }
+a {
+  text-decoration: none;
+}
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px rgba(91, 70, 216, 0.4);
+    }
+
+    .contact-form textarea {
+      min-height: 120px;
+      max-height: 250px;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 14px 30px;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 5px 15px rgba(91, 70, 216, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      align-self: flex-start;
+      margin-top: 10px;
+    }
+
+    .btn-primary:hover {
+      background-color: #492dbf;
+      box-shadow: 0 8px 20px rgba(73, 45, 191, 0.6);
+    }
+
+   .bg-circles-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: visible; /* Make sure container itself doesn't clip circles */
+  z-index: 0;
+  pointer-events: none;
+}
+
+    /* --- Animation Keyframes --- */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px) translateX(10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* Decorative Circles */
+   .deco-circle {
+  position: absolute;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  opacity: 0.9;
+  z-index: 0;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Updated positions and sizes so all circles stay fully visible inside container */
+
+.circle-1 {
+  top: 10px;          /* moved down from -30px */
+  left: 10px;         /* moved right from 5% */
+  width: 140px;       /* slightly smaller */
+  height: 140px;
+  animation-duration: 7s;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  top: 40%;
+  left: 20%;          /* moved right from 12% */
+  width: 70px;        /* slightly smaller */
+  height: 70px;
+  animation-duration: 9s;
+  animation-delay: -2s;
+}
+
+.circle-3 {
+  bottom: 10%;
+  left: 15%;          /* moved right from 8% */
+  width: 60px;
+  height: 60px;
+  animation-duration: 6s;
+  animation-delay: -4s;
+}
+
+.circle-4 {
+  top: 10px;          /* moved down from -40px */
+  right: 10px;        /* moved left from 5% */
+  width: 130px;       /* slightly smaller */
+  height: 130px;
+  animation-duration: 8s;
+  animation-delay: -1s;
+}
+
+.circle-5 {
+  bottom: 15%;
+  right: 15px;        /* moved left from 7% */
+  width: 90px;        /* slightly smaller */
+  height: 90px;
+  animation-duration: 10s;
+  animation-delay: -5s;
+}
+    /* Responsive */
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 25px;
+      }
+
+      .image-container,
+      .contact-form {
+        max-width: 100%;
+      }
+
+      .contact-form h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+ <div class="background-shape shape1"></div>
+    <div class="background-shape shape2"></div>
+    <div class="background-shape shape3"></div>
+    <div class="background-shape shape4"></div>
+    <div class="background-shape shape5"></div>
+    <div class="background-shape shape6"></div>
+ <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">POSTIFY</div>
+        <div class="nav-links">
+            <a href="HomeAfterlogin.html" class="nav-link active">Home</a>
+            <a href="ForYou.html" class="nav-link">Articles</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="index1.html" class="nav-link">Log Out</a>
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <button class="search-btn-mobile">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+  <main>
+    <!-- Decorative Circles Container -->
+    <section class="bg-circles-container">
+      <div class="deco-circle circle-1"></div>
+      <div class="deco-circle circle-2"></div>
+      <div class="deco-circle circle-3"></div>
+      <div class="deco-circle circle-4"></div>
+      <div class="deco-circle circle-5"></div>
+    </section>
+
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Contact Us Image" />
+    </div>
+
+    <form class="contact-form" id="contactForm">
+      <h1>Contact <span class="highlight">Us</span></h1>
+
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Your full name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="your.email@example.com" required />
+
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Write your message here..." required></textarea>
+
+      <button type="submit" class="btn-primary">Send Message</button>
+    </form>
+
+
+    
+  </main>
+
+ <script>
+  // Simple form submission handler
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    // Collect values (in real app, send to server here)
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+     if (!email.includes("@")) {
+            alert("Please enter a valid email address containing '@'.");
+            return;
+        }
+
+    if (name && email && message) {
+      alert(`Thanks for reaching out, ${name}! We'll get back to you shortly.`);
+      form.reset();
+    } else {
+      alert('Please fill out all fields.');
+    }
+  });
+</script>
+
+
+</body>
+</html>

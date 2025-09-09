@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe Section</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>/* --- General & Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ebefff;
+    color: #333;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* --- Header / Navigation --- */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 80px;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logo strong {
+    font-weight: 400;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #6d28d9;
+    border-radius: 50%;
+}
+
+.search-icon {
+    cursor: pointer;
+    color: #333;
+}
+
+/* --- Main Subscribe Card --- */
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subscribe-card {
+    background-color: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.07);
+    display: flex;
+    align-items: center;
+    max-width: 900px;
+    width: 57vw;
+    height: 57vh;
+    overflow: hidden; /* Important for containing the shapes */
+}
+
+/* --- Left Side: Graphics --- */
+.graphics {
+    flex-basis: 40%;
+    position: relative;
+    height: 400px;
+    min-width: 300px;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 999px; /* Creates pill/circle shapes */
+    background: linear-gradient(45deg, #4f46e5, #a259ff);
+}
+
+/* Position and style individual decorative shapes */
+.shape-1 { width: 140px; height: 50px; top: 50px; left: 100px; transform: rotate(-45deg); }
+.shape-2 { width: 100px; height: 40px; top: 30px; right: 20px; transform: rotate(45deg); }
+.shape-3 { width: 80px; height: 80px; bottom: 30px; left: 20px; border: 15px solid #4f46e5; background: transparent; }
+.shape-4 { width: 40px; height: 40px; top: 150px; left: 40px; }
+.shape-5 { width: 90px; height: 35px; bottom: 80px; right: 70px; transform: rotate(-45deg); }
+
+
+/* --- Right Side: Content --- */
+.content {
+    flex-basis: 60%;
+    padding: 40px 60px;
+}
+
+.content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.content p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.content form {
+    display: flex;
+    box-shadow: 0 5px 15px rgba(109, 40, 217, 0.1);
+    border-radius: 12px;
+}
+
+.content input {
+    flex-grow: 1;
+    border: 1px solid #e0e0e0;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 12px 0 0 12px;
+    border-right: none;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.content input:focus {
+    border-color: #8e2de2;
+}
+
+.content input::placeholder {
+    color: #aaa;
+}
+
+.content button {
+    background: linear-gradient(45deg, #4a00e0, #8e2de2);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 0 12px 12px 0;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.content button:hover {
+    opacity: 0.9;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 920px) {
+    .subscribe-card {
+        flex-direction: column;
+        max-width: 450px;
+        text-align: center;
+    }
+
+    .graphics {
+        width: 100%;
+        height: 200px;
+        min-width: auto;
+    }
+
+    .content {
+        padding: 40px;
+    }
+    
+    header {
+        padding: 20px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+        display: block; /* Switch off grid for simple top-to-bottom flow */
+    }
+
+    header {
+        position: static;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .content h1 {
+        font-size: 2rem;
+    }
+
+    .content p {
+        font-size: 0.9rem;
+    }
+
+    .content form {
+        flex-direction: column;
+        box-shadow: none;
+    }
+
+    .content input {
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .content button {
+        border-radius: 12px;
+    }
+
+/* --- Animation Keyframes --- */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Decorative Circles */
+        .deco-circle-sus {
+            position: absolute;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.9;
+            z-index: 0;
+            /* Apply the animation */
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Set position and unique animation timing for each circle */
+        .circle-1-sus { top: -30px; left: 5%; width: 160px; height: 160px; animation-duration: 7s; }
+        .circle-2-sus { top: 40%; left: 12%; width: 80px; height: 80px; animation-duration: 9s; animation-delay: -2s; }
+        
+
+}</style>
+<body>
+
+    <header>
+        <div class="logo">RISE<strong>BLOG</strong></div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Articles</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="suscribe">
+        <div class="subscribe-card">
+            <div class="graphics">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+                <div class="shape shape-5"></div>
+                <div class="deco-circle circle-1"></div>
+                <div class="deco-circle circle-2"></div>
+            </div>
+            <div class="content">
+                <h1>Subscribe</h1>
+                <p>Subscribe to our newsletter and get upto 40% off on our exclusive service.</p>
+                <form action="#">
+                    <input type="email" placeholder="Email Address" required>
+                    <button type="submit">SUBSCRIBE</button>
+                </form>
+            </div>
+        </div>
+    </main>
+<section class="bg-circles-container">
+                    <div class="deco-circle circle-1-sus"></div>
+                    <div class="deco-circle circle-2-sus"></div>
+                    <div class="deco-circle circle-3-sus"></div>
+                    <div class="deco-circle circle-4-sus"></div>
+                    <div class="deco-circle circle-5-sus"></div>
+                </section>
+
+
+
+                </section>
+</body>
+</html>

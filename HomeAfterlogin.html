@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiseBlog - For You</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> </head>
+
+    <style>
+        :root {
+    --primary-color: #4A47E3;
+    --background-color: #F8F9FA;
+    --card-background: #FFFFFF;
+    --text-color: #343A40;
+    --subtle-text: #6C757D;
+    --border-color: #E9ECEF;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ebefff;
+    color: var(--text-color);
+    margin: 0;
+    padding: 2rem;
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.background-shape {
+    position: absolute;
+    border: 10px solid #97a0ff;
+    border-radius: 999px;
+    z-index: -1;
+}
+.shape1 { top: -50px; left: -80px; width: 200px; height: 100px; transform: rotate(45deg); }
+.shape2 { top: 300px; left: -120px; width: 300px; height: 150px; transform: rotate(45deg); }
+.shape3 { top: 650px; left: -60px; width: 150px; height: 75px; transform: rotate(45deg); }
+.shape4 { top: 100px; right: -80px; width: 200px; height: 100px; transform: rotate(45deg); }
+.shape5 { top: 400px; right: -100px; width: 250px; height: 125px; transform: rotate(45deg); }
+.shape6 { top: 700px; right: -50px; width: 120px; height: 60px; transform: rotate(45deg); }
+
+
+.shape7 { top: 1000px; left: -90px; width: 220px; height: 110px; transform: rotate(45deg); }
+.shape8 { top: 1250px; right: -70px; width: 180px; height: 90px; transform: rotate(45deg); }
+.shape9 { top: 1550px; left: -110px; width: 280px; height: 140px; transform: rotate(45deg); }
+.shape10 { top: 1800px; right: -130px; width: 320px; height: 160px; transform: rotate(45deg); }
+.shape11 { top: 2100px; left: -75px; width: 190px; height: 95px; transform: rotate(45deg); }
+
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+ 
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-purple);
+}
+
+
+.search-btn-mobile {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.search-btn:hover,
+.search-btn-mobile:hover {
+    color: var(--gray-900);
+}
+
+.mobile-menu {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-btn span {
+    width: 1rem;
+    height: 2px;
+    background: var(--gray-600);
+    margin-bottom: 2px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover span {
+    background: var(--gray-900);
+}
+
+
+
+main {
+    display: flex;
+    gap: 2rem;
+}
+.main-content {
+    flex: 3;
+}
+h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-top: 0;
+}
+.search-bar input {
+    width: 97%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #4e4e4e47;
+    border-radius: 40px;
+    font-size: 1rem;
+    background-color: #ffffff63;
+    background: linear-gradient(38deg, #fefefe, transparent);
+}
+.filter-tabs {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.tab-link {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--subtle-text);
+    cursor: pointer;
+    font-weight: 500;
+}
+.tab-link.active {
+    color: var(--text-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+
+.article-card {
+    display: flex;
+    gap: 1.5rem;
+    background-color: var(--card-background);
+    padding: 1.5rem;
+    border-radius: 45px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.article-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+.article-content h3 { margin: 0 0 0.5rem; font-size: 1.25rem; }
+.article-content p { margin: 0 0 1rem; color: var(--subtle-text); }
+.article-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+.author { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+.author img { width: 24px; height: 24px; border-radius: 50%; }
+.tags .tag {
+    background-color: #eee;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+}
+.stats { color: var(--subtle-text); font-size: 0.9rem; }
+.read-more {
+    margin-left: auto;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+}
+a {
+  text-decoration: none;
+}
+
+
+    </style>
+<body>
+
+    <div class="background-shape shape1"></div>
+    <div class="background-shape shape2"></div>
+    <div class="background-shape shape3"></div>
+    <div class="background-shape shape4"></div>
+    <div class="background-shape shape5"></div>
+    <div class="background-shape shape6"></div>
+     <div class="background-shape shape7"></div>
+    <div class="background-shape shape8"></div>
+    <div class="background-shape shape9"></div>
+    <div class="background-shape shape10"></div>
+    <div class="background-shape shape11"></div>
+
+    <div class="container">
+        <header>
+           
+    <nav class="navbar">
+        <div class="nav-brand">POSTIFY</div>
+        <div class="nav-links">
+            <a href="HomeAfterlogin.html" class="nav-link active">Home</a>
+            <a href="ForYou.html" class="nav-link">Articles</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class = "nav-link">Contact</a>
+            <a href="index1.html" class="nav-link">Log Out</a>
+          
+        </div>
+        <div class="mobile-menu">
+            <button class="search-btn-mobile">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+           
+        </header>
+
+        <main>
+            <div class="main-content">
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search article...">
+                </div>
+                <div class="filter-tabs">
+                    <button class="tab-link active" data-filter="all">All</button>
+                    <button class="tab-link" data-filter="technology">Technology</button>
+                    <button class="tab-link" data-filter="environment">Environment</button>
+                    <button class="tab-link" data-filter="business">Business</button>
+                    <button class="tab-link" data-filter="politics">Politics</button>
+                </div>
+
+                <div class="articles-feed">
+                    <div class="article-card" data-category="environment">
+                        <img src="floodimg.png" alt="Christmas trees" class="article-image">
+                        <div class="article-content">
+                            <h3>Why Punjab keeps flooding</h3>
+                            <p>Punjab, drained by three perennial rivers and a number of smaller tributaries and seasonal rivers, is naturally prone to flooding. But the devastation is made worse by poor governance and decision-making ...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Jashu Garg</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag environment">Environment</span>
+                                    <span class="tag green">Green</span>
+                                </div>
+                                <div class="stats">
+                                    <span>41 ❤️</span>
+                                    <span>21 💬</span>
+                                </div>
+                                <a href="punjabfloodAr.html" class="read-more">Read More</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="technology">
+                        <img src="pic2.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BB Lorem ipsum dolor sit amet consectetur, adipisicing elit. Reprehenderit voluptate atque ad expedita harum voluptatem cupiditate, nihil, nulla voluptas dolore ducimus? Est aperiam doloribus inventore beatae? Dolorem quas id repellendus!C journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                               <a href="article.html" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="technology">
+                        <img src="pic3.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BBC Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur iusto ipsa corrupti excepturi nobis unde pariatur, earum, nihil debitis asperiores qui illo aspernatur, sed optio harum voluptates consequuntur ratione deleniti. journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                                <button class="read-more">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="technology">
+                        <img src="pic4.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BBC Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit repudiandae in velit dolorem, perferendis quisquam debitis deleniti facilis ipsum, aspernatur molestiae, quos doloribus totam eligendi expedita optio autem vitae adipisci. journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                              <a href="article.html" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="technology">
+                        <img src="pic5.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BBC  Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium fugit veniam maiores eligendi delectus neque quis a hic necessitatibus eos, reprehenderit itaque at dignissimos, aliquam corrupti vel harum blanditiis velit.journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                                <a href="article.html" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="article-card" data-category="technology">
+                        <img src="pic6.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BBC  Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti eligendi placeat cupiditate perspiciatis dolorem aspernatur delectus iste, quidem vero sequi doloribus aliquam natus, ipsa quod! Laudantium ea id ad enim!journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                               <a href="article.html" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="technology">
+                        <img src="pic7.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BBC  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad ab veniam similique tenetur iure laudantium necessitatibus ullam quibusdam unde ut quas dicta accusantium qui, totam, fuga asperiores. Non, autem porro.journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                               <a href="article.html" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="technology">
+                        <img src="pic8.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BBC Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque aliquam quod sunt. Fugit, fugiat ullam. Illum, repellendus sint. Consectetur ipsam qui numquam veniam voluptatem dignissimos tenetur aspernatur, quasi magnam atque?journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                                <a href="article.html" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="article-card" data-category="business">
+                        <img src="ENVIRON.png" alt="Bankman-Fried" class="article-image">
+                        <div class="article-content">
+                            <h3>The law comes for Bankman-Fried</h3>
+                            <p>Less than a week after telling a BBC  Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti eligendi placeat cupiditate perspiciatis dolorem aspernatur delectus iste, quidem vero sequi doloribus aliquam natus, ipsa quod! Laudantium ea id ad enim!journalist that he didn't think he'd be arrested for his role...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="TECH.png" alt="Author">
+                                    <span>Sam</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag ftx">FTX</span>
+                                </div>
+                                <div class="stats">
+                                    <span>34 ❤️</span>
+                                    <span>34 💬</span>
+                                </div>
+                               <a href="article.html" class="read-more">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="article-card" data-category="technology">
+                         <img src="pic2.png" alt="Neuralink" class="article-image">
+                        <div class="article-content">
+                            <h3>Elon Musk shows off updates to his brain chips</h3>
+                            <p>Elon Musk's health tech venture Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo blanditiis quod aliquam accusamus voluptates perspiciatis eos quidem magnam fuga, a odit vel numquam magni distinctio. Sed numquam nisi illum optio. Neuralink shared updates to its brain...</p>
+                            <div class="article-meta">
+                                <div class="author">
+                                    <img src="tick.png" alt="Author">
+                                    <span>Joana</span>
+                                </div>
+                                <div class="tags">
+                                    <span class="tag tech">Tech</span>
+                                    <span class="tag elon-musk">Elon Musk</span>
+                                </div>
+                                <div class="stats">
+                                    <span>32 ❤️</span>
+                                    <span>12 💬</span>
+                                </div>
+                                <button class="read-more">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+        </main>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const filterTabs = document.querySelectorAll('.tab-link');
+    const articles = document.querySelectorAll('.article-card');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          
+            filterTabs.forEach(t => t.classList.remove('active'));
+          
+            tab.classList.add('active');
+
+            const filterValue = tab.getAttribute('data-filter');
+
+            articles.forEach(article => {
+                const articleCategory = article.getAttribute('data-category');
+
+          
+                if (filterValue === 'all' || filterValue === articleCategory) {
+                    article.style.display = 'flex';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+    </script>
+</body>
+</html>

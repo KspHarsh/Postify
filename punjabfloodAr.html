@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postify - Article Page</title>
+   
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<style>
+ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background: linear-gradient(135deg, #fefefe 0%, #ffffff 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+:root {
+    --primary-color: #5d3eff;
+    --brand-purple: #6366f1;
+    --brand-purple-light: #a5b4fc;
+    --brand-purple-dark: #4338ca;
+    --brand-blue: #3b82f6;
+    
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-purple);
+}
+
+.search-btn,
+.search-btn-mobile {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.search-btn:hover,
+.search-btn-mobile:hover {
+    color: var(--gray-900);
+}
+
+.mobile-menu {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-btn span {
+    width: 1rem;
+    height: 2px;
+    background: var(--gray-600);
+    margin-bottom: 2px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover span {
+    background: var(--gray-900);
+}
+
+/* Main Container */
+.main-container {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 70px; /* space for fixed navbar */
+    padding-bottom: 0; /* footer is not fixed */
+    flex: 1;
+}
+
+/* Background Circles Container */
+.bg-circles-container {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Footer */
+.site-footer {
+    background: linear-gradient(180deg, #0f172a 0%, #0b1222 100%);
+    color: #cbd5e1;
+    position: relative;
+    z-index: 3;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+}
+
+.footer-col.about { grid-column: span 5; }
+.footer-col.links { grid-column: span 2; }
+.footer-col.categories { grid-column: span 3; }
+.footer-col.contact { grid-column: span 2; }
+
+@media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: repeat(6, 1fr); }
+    .footer-col.about { grid-column: span 6; }
+    .footer-col.links { grid-column: span 3; }
+    .footer-col.categories { grid-column: span 3; }
+    .footer-col.contact { grid-column: span 6; }
+}
+
+@media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-col.about,
+    .footer-col.links,
+    .footer-col.categories,
+    .footer-col.contact { grid-column: auto; }
+}
+
+.footer-title {
+    color: #e2e8f0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-brand { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0 0.75rem 0; }
+.brand-logo { width: 40px; height: 40px; border-radius: 8px; background:#1e293b; display:flex; align-items:center; justify-content:center; color:#94a3b8; }
+.brand-name { font-weight: 800; color:#f8fafc; letter-spacing: 0.06em; }
+.brand-sub { font-size: 0.85rem; color:#94a3b8; }
+
+.footer-desc { color:#94a3b8; margin: 0.5rem 0 0.5rem 0; }
+.footer-read-more { color:#93c5fd; text-decoration: underline; }
+.footer-read-more:hover { color:#bfdbfe; }
+
+.footer-list { list-style: none; display: grid; gap: 0.5rem; padding-left: 0; }
+.footer-list li { display: flex; align-items: center; gap: 0.5rem; color:#cbd5e1; }
+.footer-list a { color:#cbd5e1; text-decoration: none; }
+.footer-list a:hover { color:#ffffff; }
+
+.footer-bottom { border-top: 1px solid rgba(148, 163, 184, 0.2); margin-top: 2rem; padding-top: 1rem; text-align: center; color:#94a3b8; }
+
+/* Background Shapes */
+.bg-shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(48px);
+}
+
+.shape-1 {
+    top: -8rem;
+    left: -8rem;
+    width: 16rem;
+    height: 16rem;
+    background: rgba(99, 102, 241, 0.1);
+}
+
+.shape-2 {
+    top: 25%;
+    right: -8rem;
+    width: 20rem;
+    height: 20rem;
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.shape-3 {
+    bottom: -8rem;
+    left: 25%;
+    width: 18rem;
+    height: 18rem;
+    background: rgba(165, 180, 252, 0.1);
+}
+
+.shape-4 {
+    top: 5rem;
+    left: 2rem;
+    width: 4rem;
+    height: 4rem;
+    background: var(--brand-purple);
+    opacity: 0.15;
+    filter: none;
+}
+
+.shape-5 {
+    bottom: 5rem;
+    right: 2rem;
+    width: 6rem;
+    height: 6rem;
+    background: var(--brand-blue);
+    opacity: 0.1;
+    filter: none;
+}
+
+.shape-6 {
+    top: 50%;
+    left: 4rem;
+    width: 5rem;
+    height: 5rem;
+    background: var(--brand-purple-light);
+    opacity: 0.2;
+    filter: none;
+}
+
+.shape-7 {
+    top: 8rem;
+    right: 25%;
+    width: 10rem;
+    height: 5rem;
+    border-radius: 50px;
+    background: rgba(99, 102, 241, 0.08);
+    transform: rotate(45deg);
+    filter: blur(24px);
+}
+
+.shape-8 {
+    bottom: 25%;
+    left: 33%;
+    width: 12rem;
+    height: 6rem;
+    border-radius: 50px;
+    background: rgba(59, 130, 246, 0.08);
+    transform: rotate(-12deg);
+    filter: blur(24px);
+}
+
+
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+
+.sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    order: 2;
+}
+
+.sidebar-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+
+.articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.article-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.article-item:hover {
+    background: var(--gray-50);
+}
+
+.article-thumb {
+    width: 4rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+}
+
+.article-info {
+    flex: 1;
+}
+
+.article-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow: hidden;
+    transition: color 0.2s;
+}
+
+.article-item:hover .article-title {
+    color: var(--brand-purple);
+}
+
+.article-author {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    margin-bottom: 0.25rem;
+}
+
+.article-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--brand-purple);
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+}
+
+
+.trending-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.trending-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.trending-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--gray-300);
+    min-width: 2rem;
+}
+
+.trending-info {
+    flex: 1;
+}
+
+.trending-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+}
+
+.trending-item:hover .trending-title {
+    color: var(--brand-purple);
+}
+
+.trending-author {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+
+.topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.topic-tag {
+    display: inline-block;
+    font-size: 0.875rem;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.topic-tag:hover {
+    background: var(--brand-purple);
+    color: white;
+}
+
+
+.main-article {
+    flex: 1;
+    max-width: 64rem;
+    order: 1;
+}
+
+.article-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+
+.article-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.author-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.author-name-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.author-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.follow-btn {
+    background: var(--brand-purple);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    align-self: flex-start;
+}
+
+.publish-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    flex-wrap: wrap;
+}
+
+.publish-date {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.separator {
+    display: none;
+}
+
+.social-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.social-btn {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: color 0.2s;
+}
+
+.social-btn:hover {
+    color: var(--gray-700);
+}
+
+
+.article-main-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+
+.article-image-section {
+    margin-bottom: 2rem;
+}
+
+.article-main-image {
+    width: 100%;
+    height: 24rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.image-caption {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+
+.article-content {
+    color: var(--gray-700);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.article-content p {
+    margin-bottom: 1.5rem;
+}
+
+
+.article-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.action-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+}
+
+.action-btn:hover {
+    color: var(--brand-purple);
+}
+
+.like-count {
+    font-weight: 500;
+}
+
+@media (min-width: 640px) {
+    .nav-links {
+        display: flex;
+    }
+    
+    .mobile-menu {
+        display: none;
+    }
+    
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+    
+    .nav-brand {
+        font-size: 1.25rem;
+    }
+    
+    .separator {
+        display: inline;
+    }
+    
+    .publish-info {
+        font-size: 0.875rem;
+    }
+    
+    .article-header {
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+    
+    .author-name-section {
+        flex-wrap: nowrap;
+    }
+    
+    .publish-info {
+        flex-wrap: nowrap;
+    }
+    
+    .social-btn {
+        padding: 0.5rem;
+    }
+    
+    .social-btn i {
+        font-size: 1.125rem;
+    }
+    
+    .article-main-title {
+        font-size: 2.5rem;
+    }
+    
+    .article-actions {
+        flex-wrap: nowrap;
+    }
+    
+    .article-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .nav-links {
+        gap: 2rem;
+    }
+    
+    .content-wrapper {
+        flex-direction: row;
+        padding: 2rem 1.5rem;
+    }
+    
+    .sidebar {
+        width: 20rem;
+        order: 1;
+    }
+    
+    .main-article {
+        order: 2;
+    }
+    
+    .article-main-title {
+        font-size: 3rem;
+    }
+    
+    .article-main-image {
+        height: 32rem;
+    }
+    
+    .article-card {
+        padding: 2rem;
+    }
+    
+    .article-content {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 639px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: flex;
+    }
+    
+    .content-wrapper {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .sidebar {
+        order: 2;
+    }
+    
+    .main-article {
+        order: 1;
+    }
+    
+    .article-card {
+        padding: 1rem;
+    }
+    
+    .article-main-title {
+        font-size: 1.5rem;
+    }
+    
+    .article-main-image {
+        height: 12rem;
+    }
+    
+    .social-btn i {
+        font-size: 1rem;
+    }
+    
+    .article-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .action-group {
+        align-self: stretch;
+    }
+}
+
+
+
+.article-card {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.sidebar-card {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.sidebar-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.sidebar-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        
+        .deco-circle {
+            position: absolute;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.9;
+            z-index: 2;
+        
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        
+        .circle-1 { top: -30px; left: 5%; width: 160px; height: 160px; animation-duration: 7s; }
+        .circle-2 { top: 40%; left: 12%; width: 80px; height: 80px; animation-duration: 9s; animation-delay: -2s; }
+        .circle-3 { bottom: 10%; left: 8%; width: 60px; height: 60px; animation-duration: 6s; animation-delay: -4s; }
+        .circle-4 { top: -40px; right: 5%; width: 140px; height: 140px; animation-duration: 8s; animation-delay: -1s;}
+        .circle-5 { bottom: 15%; right: 7%; width: 100px; height: 100px; animation-duration: 10s; animation-delay: -5s;}
+</style>
+<body>
+    
+    <nav class="navbar">
+        <div class="nav-brand">POSTIFY</div>
+        <div class="nav-links">
+            <a href="index1.html" class="nav-link active">Home</a>
+            <a href="HomeAfterlogin.html" class="nav-link">Articles</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="index1.html" class="nav-link">Log Out</a>
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <button class="search-btn-mobile">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+  
+    <div class="main-container">
+      
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+            <div class="shape shape-6"></div>
+            <div class="shape shape-7"></div>
+            <div class="shape shape-8"></div>
+        </div>
+
+        <div class="content-wrapper">
+         
+            <aside class="sidebar">
+              
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">For you</h3>
+                    <div class="articles-list">
+                        <a href="#" class="article-item">
+                            <img src="ENVIRON.png" alt="Climate crisis" class="article-thumb">
+                            <div class="article-info">
+                                <h4 class="article-title">The climate crisis and the psychological burden of living in a dying world</h4>
+                                <p class="article-author">Alex Chen</p>
+                                <span class="article-category">Environment</span>
+                            </div>
+                        </a>
+                        <a href="" class="article-item">
+                            <img src="GADETS.png" alt="Benefits of thinking" class="article-thumb">
+                            <div class="article-info">
+                                <h4 class="article-title">The untethered benefits of thinking on paper as we age</h4>
+                                <p class="article-author">Maria Santos</p>
+                                <span class="article-category">Health</span>
+                            </div>
+                        </a>
+                        <a href="#" class="article-item">
+                            <img src="TECH.png" alt="Building better" class="article-thumb">
+                            <div class="article-info">
+                                <h4 class="article-title">Building Better: Five Brutality Challenged Ideas</h4>
+                                <p class="article-author">John Smith</p>
+                                <span class="article-category">Design</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+             
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">Trending</h3>
+                    <div class="trending-list">
+                        <a href="#" class="trending-item">
+                            <span class="trending-number">01</span>
+                            <div class="trending-info">
+                                <h4 class="trending-title">The climate crisis and the psychological burden of living in a dying world</h4>
+                                <p class="trending-author">Alex Chen</p>
+                            </div>
+                        </a>
+                        <a href="#" class="trending-item">
+                            <span class="trending-number">02</span>
+                            <div class="trending-info">
+                                <h4 class="trending-title">The untethered benefits of thinking on paper as we age</h4>
+                                <p class="trending-author">Maria Santos</p>
+                            </div>
+                        </a>
+                        <a href="#" class="trending-item">
+                            <span class="trending-number">03</span>
+                            <div class="trending-info">
+                                <h4 class="trending-title">Building Better: Five Brutality Challenged Ideas</h4>
+                                <p class="trending-author">John Smith</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+               
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">Recommended topics</h3>
+                    <div class="topics-list">
+                        <span class="topic-tag">Technology</span>
+                        <span class="topic-tag">AI</span>
+                        <span class="topic-tag">Science</span>
+                        <span class="topic-tag">Future</span>
+                        <span class="topic-tag">Innovation</span>
+                    </div>
+                </div>
+            </aside>
+
+            
+            <main class="main-article">
+                <article class="article-card">
+                    
+                    <div class="article-header">
+                        <img src="jash.png" alt="Joana Marie Jones" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name-section">
+                                <h3 class="author-name"> Jashu Garg</h3>
+                                <span class="follow-btn">Follow</span>
+                            </div>
+                            <div class="publish-info">
+                                <div class="publish-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>PUBLISHED SAT, AUG 30 2025 10:09 PM EST</span>
+                                </div>
+                                <span class="separator">•</span>
+                                <span>UPDATED THU, SEPT 1 2025 11:10 AM EST</span>
+                            </div>
+                        </div>
+                        <div class="social-buttons">
+                            <button class="social-btn" onclick="shareToFacebook()">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button class="social-btn" onclick="shareToTwitter()">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button class="social-btn" onclick="shareToLinkedIn()">
+                                <i class="fab fa-linkedin-in"></i>
+                            </button>
+                            <button class="social-btn" onclick="shareArticle()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+             
+                    <h1 class="article-main-title">
+                        Why Punjab keeps flooding...
+                    </h1>
+
+             
+                    <div class="article-image-section">
+                        <img src="floodimg.png" class="article-main-image" alt="Article main image">
+                        <p class="image-caption">
+                            Punjab, drained by three perennial rivers and a number of smaller tributaries and seasonal rivers, is naturally prone to flooding. But the devastation is made worse by poor governance and decision-making
+                        </p>
+                    </div>
+
+                 
+                    <div class="article-content">
+                        <p>
+                            The Punjab government on Tuesday declared all 23 districts of the state flood-hit, as heavy rainfall and swollen rivers continued to wreak havoc, leaving 30 people dead so far, and affecting more than 3.5 lakh residents.
+                        </p>
+
+                        <p>
+                           According to official figures, Pathankot recorded the highest number of fatalities at six, followed by Ludhiana with four. Three people remain missing in Pathankot.This is much below the figures for the 1988 floods, which saw at least 600 deaths, but the spread is as wide; and people refer often and with trepidation to the nightmare of 37 years ago.
+                        </p>
+
+                        <p>
+                            The floods have also caused extensive damage to agriculture, with 1,48,590 hectares of crops submerged. Gurdaspur remains the worst-affected district in Punjab, where 324 villages have been hit. Amritsar reported damage in 135 villages and Hoshiarpur in 119 villages.
+                        </p>
+
+                        <p>
+                            The deluge has been triggered by the swollen Sutlej, Beas and Ravi rivers, as well as seasonal rivulets carrying excess rainwater from catchment areas in Himachal Pradesh and Jammu and Kashmir, where heavy rainfall has wrecked havoc.
+                        </p>
+
+                        <p>
+                            Musk also said he plans to get one himself. "You could have a Neuralink device implanted right now and you wouldn't even know. I mean, hypothetically ... In fact, in one of these demos, I will," he said. He reiterated that on Twitter after the event.
+                        </p>
+
+                        <p>
+                            Since none of Neuralink's devices have been tested on humans or approved by the FDA, Wednesday's announcements warrant skepticism, said Xing Chen, assistant professor in the Department of Ophthalmology at the University of Pittsburgh School of Medicine.
+                        </p>
+                    </div>
+
+                    <div class="article-actions">
+                        <div class="action-group">
+                            <button class="action-btn" onclick="likeArticle()">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span class="like-count">245</span>
+                            </button>
+                            <button class="action-btn" onclick="openComments()">
+                                <i class="fas fa-comment"></i>
+                                <span>12</span>
+                            </button>
+                            <button class="action-btn" onclick="shareArticle()">
+                                <i class="fas fa-share-alt"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                        <button class="action-btn" onclick="saveArticle()">
+                            <i class="fas fa-bookmark"></i>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col about">
+                    <h3 class="footer-title">About Postify</h3>
+                    <div class="footer-brand">
+                        <div class="brand-logo">⦿</div>
+                        <div class="brand-text">
+                            <div class="brand-name">POSTIFY</div>
+                            <div class="brand-sub">Listing ads Portal</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Integer ac lorem sit amet est rhoncus dapi bus don cad pede acus morbi elit nunc molestie at ultrices eu eleifen lorem ut dictum erat masa...</p>
+                    <a href="#" class="footer-read-more">Read More</a>
+                </div>
+                <div class="footer-col links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col categories">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list">
+                        <li>Electronics</li>
+                        <li>Vehicles</li>
+                        <li>Bikes</li>
+                        <li>Animals</li>
+                        <
+                        <li>Marketing</li>
+                        <li>Technology</li>
+                    </ul>
+                </div>
+                <div class="footer-col contact">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list contact-list">
+                        <li>📍 Lorem # 38, Ispum Hill, Lorem, WA 12345</li>
+                        <li>☎ (777) 123 4567</li>
+                        <li>☎ (123) 456 7890</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Copyright © 2017 Classify - All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <section class="bg-circles-container">
+                    <div class="deco-circle circle-1"></div>
+                    <div class="deco-circle circle-2"></div>
+                    <div class="deco-circle circle-3"></div>
+                    <div class="deco-circle circle-4"></div>
+                    <div class="deco-circle circle-5"></div>
+                </section>
+  
+</body>
+</html>

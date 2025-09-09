@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - Postify</title>
+  <style>
+    /* Reset some default styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #e8ecff;
+      color: #000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+
+
+    .background-shape {
+    position: absolute;
+    border: 10px solid #97a0ff;
+    border-radius: 999px;
+    z-index: -1;
+}
+.shape1 { top: -50px; left: -80px; width: 200px; height: 100px; transform: rotate(45deg); }
+.shape2 { top: 300px; left: -120px; width: 300px; height: 150px; transform: rotate(45deg); }
+.shape3 { top: 650px; left: -60px; width: 150px; height: 75px; transform: rotate(45deg); }
+.shape4 { top: 100px; right: -80px; width: 200px; height: 100px; transform: rotate(45deg); }
+.shape5 { top: 400px; right: -100px; width: 250px; height: 125px; transform: rotate(45deg); }
+.shape6 { top: 700px; right: -50px; width: 120px; height: 60px; transform: rotate(45deg); }
+
+    /* Navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-purple);
+}
+
+
+.search-btn-mobile {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.search-btn:hover,
+.search-btn-mobile:hover {
+    color: var(--gray-900);
+}
+
+.mobile-menu {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-btn span {
+    width: 1rem;
+    height: 2px;
+    background: var(--gray-600);
+    margin-bottom: 2px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover span {
+    background: var(--gray-900);
+}
+
+    /* Main container */
+    main {
+      background: #fff;
+      margin: 165px 20px;
+      max-width: 1100px; /* increased width */
+      width: 100%;
+      min-height: 600px; /* added height */
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(111, 82, 255, 0.2);
+      display: flex;
+      padding: 80px 80px 80px 80px; /* increased padding */
+      gap: 40px;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative; /* for absolute circles */
+      overflow: visible; /* make sure circles are visible */
+      z-index: 10;
+    }
+
+    /* Left image blob */
+    .image-container {
+      flex: 1 1 300px;
+      max-width: 320px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+      z-index: 20; /* above circles */
+    }
+
+    .image-container::before {
+      content: '';
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 90%;
+      height: 90%;
+      background-color: #6f52ff;
+      border-radius: 55% 45% 55% 45% / 60% 40% 60% 40%;
+      filter: drop-shadow(0 10px 10px rgba(111, 82, 255, 0.2));
+      z-index: 0;
+    }
+
+    .image-container img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 55% 45% 55% 45% / 60% 40% 60% 40%;
+      z-index: 1;
+      box-shadow: 0 8px 25px rgba(111, 82, 255, 0.3);
+    }
+
+    /* Right text content */
+    .content {
+      flex: 1 1 400px;
+      z-index: 20; /* above circles */
+    }
+
+    .content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .content h1 .highlight {
+      color: #6f52ff;
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    /* Button */
+    .btn-primary {
+      background-color: #6f52ff;
+      color: #fff;
+      padding: 12px 30px;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 5px 15px rgba(111, 82, 255, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #553bcc;
+      box-shadow: 0 8px 20px rgba(85, 59, 204, 0.6);
+    }
+
+    /* Floating decorative circles container */
+    .bg-circles-container {
+      position: absolute;
+      top: 20px; /* pushed inside */
+      left: 20px; /* pushed inside */
+      width: calc(100% - 40px);
+      height: calc(100% - 40px);
+      pointer-events: none; /* ignore mouse events */
+      z-index: 0; /* behind main content */
+      overflow: visible;
+    }
+
+    /* --- Animation Keyframes --- */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-20px) translateX(10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* Decorative Circles */
+    .deco-circle {
+      position: absolute;
+      background-color: #6f52ff; /* use your primary color */
+      border-radius: 50%;
+      opacity: 0.9;
+      z-index: 0;
+      /* Apply the animation */
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(111, 82, 255, 0.4));
+    }
+
+    /* Set position and unique animation timing for each circle */
+    .circle-1 {
+      top: 10px; /* adjusted */
+      left: 15px; /* adjusted */
+      width: 160px;
+      height: 160px;
+      animation-duration: 7s;
+    }
+
+    .circle-3 {
+      bottom: 40px; /* adjusted */
+      left: 20px; /* adjusted */
+      width: 60px;
+      height: 60px;
+      animation-duration: 6s;
+      animation-delay: -4s;
+    }
+
+    .circle-4 {
+      top: 15px; /* adjusted */
+      right: 15px; /* adjusted */
+      width: 140px;
+      height: 140px;
+      animation-duration: 8s;
+      animation-delay: -1s;
+    }
+
+    .circle-5 {
+      bottom: 40px; /* adjusted */
+      right: 20px; /* adjusted */
+      width: 50px;
+      height: 50px;
+      animation-duration: 10s;
+      animation-delay: -5s;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        padding: 30px 20px;
+        gap: 25px;
+        min-height: auto; /* remove min-height on small screens */
+      }
+      .image-container,
+      .content {
+        max-width: 100%;
+      }
+      .content h1 {
+        font-size: 2rem;
+      }
+      .bg-circles-container {
+        top: 10px;
+        left: 10px;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+      }
+      .circle-1, .circle-3, .circle-4, .circle-5 {
+        /* Smaller sizes and positions for mobile */
+        width: 80px;
+        height: 80px;
+      }
+      .circle-1 { top: 0; left: 10px; }
+      .circle-3 { bottom: 20px; left: 10px; }
+      .circle-4 { top: 0; right: 10px; }
+      .circle-5 { bottom: 20px; right: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+     <div class="background-shape shape1"></div>
+    <div class="background-shape shape2"></div>
+    <div class="background-shape shape3"></div>
+    <div class="background-shape shape4"></div>
+    <div class="background-shape shape5"></div>
+    <div class="background-shape shape6"></div>
+ <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">POSTIFY</div>
+        <div class="nav-links">
+            <a href="index1.html" class="nav-link active">Home</a>
+            <a href="ForYou.html" class="nav-link">Articles</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="index1.html" class="nav-link">Log Out</a>
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <button class="search-btn-mobile">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+
+  <main>
+    <div class="image-container">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Person typing on laptop" />
+    </div>
+    <div class="content">
+      <h1>About <span class="highlight">Postify</span></h1>
+      <p>
+        Postify is your go-to platform for writing and sharing engaging articles. Whether you're a seasoned writer or just getting started, we provide a simple and intuitive interface to help you express your thoughts and ideas effectively.
+      </p>
+      <p>
+        Our mission is to empower individuals to share knowledge, stories, and insights with the world in a creative and impactful way.
+      </p>
+      <button class="btn-primary" id="startBtn">Get Started</button>
+    </div>
+
+    <!-- Floating decorative circles -->
+    <section class="bg-circles-container">
+      <div class="deco-circle circle-1"></div>
+      <!-- Removed circle-2 -->
+      <div class="deco-circle circle-3"></div>
+      <div class="deco-circle circle-4"></div>
+      <div class="deco-circle circle-5"></div>
+
+
+
+
+
+      
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('startBtn').addEventListener('click', () => {
+      alert('Welcome to Postify! Let’s start writing your first article.');
+    });
+  </script>
+
+</body>
+</html>

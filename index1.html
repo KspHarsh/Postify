@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postify - Write Your Article</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style1.css" class="style">
+    <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+ 
+    
+    <link rel="stylesheet" href="riseblog.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">Postify</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#articles">Articles</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html" id="loginBtn">Log In</a></li>
+                </ul>
+                <div class="search-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M21 21L16.65 16.65" stroke="#333333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+   
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="login-container">
+                <div class="login-image">
+                    <img src="logingirl.png" alt="Woman working on a laptop">
+                </div>
+                <div class="login-form-wrapper">
+                    <h2 id="login-heading"></h2>
+                    <p><h3>Login to access your dashboard.</h3></p>
+                    <form action="#">
+                        <div class="input-group">
+                            <label for="email">Username or Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="cta-button" id="submitLoginBtn">Log In</button>
+                        
+                    </form>
+                    <div class="social-divider">
+                        <span>OR</span>
+                    </div>
+                    <div class="social-login-icons">
+                        <a href="#" class="social-icon" aria-label="Login with Google"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-icon" aria-label="Login with Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Login with GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon" aria-label="Login with Apple"><i class="fab fa-apple"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero-section">
+            <div class="deco-circle circle-1"></div>
+            <div class="deco-circle circle-2"></div>
+            <div class="deco-circle circle-3"></div>
+            <div class="deco-circle circle-4"></div>
+            <div class="deco-circle circle-5"></div>
+
+            <div class="hero-content">
+                <div class="hero-image">
+                    <img src="FrontGirl.png" alt="Woman writing an article on a laptop">
+                </div>
+              <div class="hero-text">
+   <h1 id="my-heading"></h1>
+   <a href="sign-up.html" class="cta-button">Create Account</a>
+</div>
+            </div>
+
+          
+
+        </section>
+
+ <section class="postify-home-hero" id="home">
+           
+            <div class="hero-container">
+                <div class="bg-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                    <div class="shape shape-4"></div>
+                    <div class="shape shape-5"></div>
+                    <div class="shape shape-6"></div>
+                    <div class="shape shape-7"></div>
+                    <div class="shape shape-8"></div>
+                    <div class="shape shape-9"></div>
+                </div>
+
+                <div class="hero-content1">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="title-line">Find Your</span>
+                            <span class="title-line">Best</span>
+                            <span class="title-line highlight">Article</span>
+                            <span class="title-line">Topics here</span>
+                        </h1>
+                    </div>
+
+                    <div class="categories-section">
+                        <div class="category-container">
+                            <div class="category-item">
+                                <div class="category-card">
+                                    <div class="category-media">
+                                        <img src="TECH.png" alt="Technology">
+                                    </div>
+                                    <div class="category-info">
+                                        <h3 class="category-title">Technology</h3>
+                                        <p class="category-desc">AI, gadgets, software and Lorem ipsum dolor sit amet, consectetur  hello hi  iam adipisicing elit. Iure, et?innovation.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-card">
+                                    <div class="category-media">
+                                        <img src="ENVIRON.png" alt="Environment">
+                                    </div>
+                                    <div class="category-info">
+                                        <h3 class="category-title">Environment</h3>
+                                        <p class="category-desc">Climate, nature and sustail Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, recusandae?nability.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-card">
+                                    <div class="category-media">
+                                        <img src="GADETS.png" alt="Business">
+                                    </div>
+                                    <div class="category-info">
+                                        <h3 class="category-title">Business</h3>
+                                        <p class="category-desc">Markets, startuLorem ipsum dolor sit amet consectetur adipisicin Lorem ipsum dolor, sit ionem, et culpa!g elit. Obcaecati, iusto..</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+          
+        </section>
+
+        
+        <section class="main-content" id="articles">
+            <div class="container">
+                <div class="content-wrapper">
+                    <div class="article-heading">
+                      
+                           
+                        <h1 class="hero-title">
+                          
+                            <span class="title-line">Best</span>
+                            <span class="title-line highlight">Article</span>
+                            <span class="title-line">Today</span>
+                        </h1>
+                  
+                        <!-- ------ -->
+                        <button class="cta-button-article">See All Articles</button>
+                    </div>
+
+                    <div class="articles-section">
+                        <div class="scroll-indicator left" id="scrollLeft">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="scroll-indicator right" id="scrollRight">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+
+                        <div class="scroll-progress">
+                            <div class="scroll-progress-fill" id="scrollProgress"></div>
+                        </div>
+
+                        <div class="scroll-hint">
+                            <i class="fas fa-arrow-right"></i> Scroll to see more
+                        </div>
+
+                        <div class="articles-container">
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Joana</div>
+                                    <img src="TECH.png" alt="tech" class="article-img">
+                                    <div class="image-placeholder neuralink-bg">
+                                        <div class="neuralink-logo">A</div>
+                                        <div class="binary-code">01</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag tech">Tech</div>
+                                    <h3 class="article-title">Elon Musk shows off updates to his brain chips</h3>
+                                    <p class="article-description">Elon Musk's health tech venture Neuralink shared updates to its brain...</p>
+                                    <div class="article-meta">
+                                        <span class="time">10h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 32</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 12</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="read-more-btn" onclick="window.location.href='article.html'">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Rey</div>
+                                    <img src="ENVIRON.png" alt=" tree" class="article-img">
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag environment">Environment</div>
+                                    <h3 class="article-title">The overlooked benefits of real Christmas trees</h3>
+                                    <p class="article-description">The environmental pros and cons of Christmas trees go far beyond the also very good and must be good.</p>
+                                    <div class="article-meta">
+                                        <span class="time">12h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 41</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 21</span>
+                                        </div>
+                                    </div>
+                                   <button class="read-more-btn" onclick="window.location.href='article.html'">Read More</button>
+
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Sam</div>
+                                    <img src="GADETS.png" alt="gadets" class="article-img">
+                                    <div class="image-placeholder ftx-bg">
+                                        <div class="ftx-text">FTX</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag tech">Tech</div>
+                                    <h3 class="article-title">The law comes for Bankman-Fried</h3>
+                                    <p class="article-description">Less than a week after telling a BBC journalist that he didn't think hed be arrested for his r o l e in crypto...</p>
+                                    <div class="article-meta">
+                                        <span class="time">10h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 34</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 24</span>
+                                        </div>
+                                    </div>
+                                    <button class="read-more-btn">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Joana</div>
+                                    <div class="image-placeholder bank-bg">
+                                        <div class="bank-text">Bank of England</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag business">Business</div>
+                                    <h3 class="article-title">Bank of England warns UK housing market</h3>
+                                    <p class="article-description">Bank of England says more housing market indicators continued to soften, as...</p>
+                                    <div class="article-meta">
+                                        <span class="time">14h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 22</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 12</span>
+                                        </div>
+                                    </div>
+                                   <button class="read-more-btn" onclick="window.location.href='article.html'">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Alex</div>
+                                    <div class="image-placeholder ai-bg">
+                                        <div class="ai-text">AI</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag tech">Tech</div>
+                                    <h3 class="article-title">New AI model achieves human-level reasoning</h3>
+                                    <p class="article-description">Researchers have developed an AI system that demonstrates unprecedented reasoning capabilities...</p>
+                                    <div class="article-meta">
+                                        <span class="time">8h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 67</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 28</span>
+                                        </div>
+                                    </div>
+                                    <button class="read-more-btn">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Maya</div>
+                                    <div class="image-placeholder climate-bg">
+                                        <div class="climate-text">Climate</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag environment">Environment</div>
+                                    <h3 class="article-title">Global climate summit yields breakthrough agreement</h3>
+                                    <p class="article-description">World leaders have reached a historic agreement on climate action with concrete targets...</p>
+                                    <div class="article-meta">
+                                        <span class="time">6h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 89</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 45</span>
+                                        </div>
+                                    </div>
+                                    <button class="read-more-btn">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Neil</div>
+                                    <div class="image-placeholder space-bg">
+                                        <div class="space-text">Space</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag tech">Tech</div>
+                                    <h3 class="article-title">NASA discovers potentially habitable exoplanet</h3>
+                                    <p class="article-description">Scientists have identified a new Earth-like planet orbiting a distant star with conditions...</p>
+                                    <div class="article-meta">
+                                        <span class="time">4h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 156</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 73</span>
+                                        </div>
+                                    </div>
+                                    <button class="read-more-btn">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Sarah</div>
+                                    <div class="image-placeholder crypto-bg">
+                                        <div class="crypto-text">Crypto</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag business">Business</div>
+                                    <h3 class="article-title">Central banks accelerate digital currency plans</h3>
+                                    <p class="article-description">Major central banks are ramping up efforts to develop their own digital currencies...</p>
+                                    <div class="article-meta">
+                                        <span class="time">2h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 43</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 19</span>
+                                        </div>
+                                    </div>
+                                    <button class="read-more-btn">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Eco</div>
+                                    <div class="image-placeholder energy-bg">
+                                        <div class="energy-text">Energy</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag environment">Environment</div>
+                                    <h3 class="article-title">Solar power costs hit record low globally</h3>
+                                    <p class="article-description">Renewable energy has become the cheapest form of electricity in most countries...</p>
+                                    <div class="article-meta">
+                                        <span class="time">1h ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 78</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 31</span>
+                                        </div>
+                                    </div>
+                                    <button class="read-more-btn">Read More</button>
+                                </div>
+                            </article>
+
+                            <article class="article-card">
+                                <div class="article-image">
+                                    <div class="author-badge">Dr. Kim</div>
+                                    <div class="image-placeholder quantum-bg">
+                                        <div class="quantum-text">Quantum</div>
+                                    </div>
+                                </div>
+                                <div class="article-content">
+                                    <div class="category-tag tech">Tech</div>
+                                    <h3 class="article-title">Quantum computer solves complex problem in minutes</h3>
+                                    <p class="article-description">A new quantum computing breakthrough has solved a problem that would take classical computers...</p>
+                                    <div class="article-meta">
+                                        <span class="time">30m ago</span>
+                                        <div class="engagement">
+                                            <span class="likes"><i class="fas fa-heart"></i> 234</span>
+                                            <span class="comments"><i class="fas fa-comment"></i> 89</span>
+                                        </div>
+                                    </div>
+                                    <button class="read-more-btn">Read More</button>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <section class="bg-circles-container">
+                    <div class="deco-circle circle-1"></div>
+                    <div class="deco-circle circle-2"></div>
+                    <div class="deco-circle circle-3"></div>
+                    <div class="deco-circle circle-4"></div>
+                    <div class="deco-circle circle-5"></div>
+                </section>
+            </div>
+
+
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col about">
+                    <h3 class="footer-title">About Postify</h3>
+                    <div class="footer-brand">
+                        <div class="brand-logo">⦿</div>
+                        <div class="brand-text">
+                            <div class="brand-name">POSTIFY</div>
+                            <div class="brand-sub">Create Your Own Blogs</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc"> Our mission is to empower individuals to share knowledge, stories, and insights with the world in a creative and impactful way....</p>
+                    <a href="#" class="footer-read-more">Read More</a>
+                </div>
+                <div class="footer-col links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-list">
+                        <li><a href="index1.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="ForYou.html">Categories</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col categories">
+                    <h3 class="footer-title">Articles:</h3>
+                    <ul class="footer-list">
+                        <li>Environment</li>
+                        <li>Poltics</li>
+                       <li>Technology</li>
+            
+                        <li>Marketing</li>
+                        <li>Technology</li>
+                    </ul>
+                </div>
+                <div class="footer-col contact">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list contact-list">
+                        <li>Chitkara University</li>
+                        <li>☎ 91+ 9306512657</li>
+                        <li>☎ (123) 456 7890</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Copyright © 2025 POSTIFY - All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+            
+        </section>
+
+
+    </main>
+
+</body>
+
+</html>

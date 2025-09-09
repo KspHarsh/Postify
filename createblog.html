@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postify - Create Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+  
+    <style>
+    
+        .page-hero {
+            position: relative;
+            padding: 60px 0 20px 0;
+        }
+        .page-title {
+            text-align: center;
+            font-weight: 800;
+            font-size: 75px;
+            color: var(--dark-color);
+            margin: 0;
+        }
+     
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-purple);
+}
+
+
+.search-btn-mobile {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.search-btn:hover,
+.search-btn-mobile:hover {
+    color: var(--gray-900);
+}
+
+.mobile-menu {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-btn span {
+    width: 1rem;
+    height: 2px;
+    background: var(--gray-600);
+    margin-bottom: 2px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover span {
+    background: var(--gray-900);
+}
+        .create-form-wrapper {
+            max-width: 1100px;
+            margin: 30px auto 80px auto;
+            padding: 0 20px;
+        }
+        .create-form-card {
+            background: var(--white-color);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(93, 62, 255, 0.15);
+            overflow: hidden;
+        }
+        .create-form-header {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            padding: 28px 32px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        .create-form-header .icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--primary-color), #7c5fff);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .create-form-header h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            color: var(--dark-color);
+        }
+        .create-form-body {
+            padding: 28px 32px 32px 32px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+        }
+        .form-section {
+            background: #ffffff;
+            border: 2px solid #f0f0f5;
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .section-title {
+            margin: 0 0 16px 0;
+            font-size: 1.05rem;
+            color: var(--dark-color);
+        }
+        .input-group { margin-bottom: 16px; }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #555555;
+            margin-bottom: 8px;
+        }
+        .input-group input[type="text"],
+        .input-group input[type="url"],
+        .input-group input[type="number"],
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 14px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            background: #fff;
+        }
+        .input-group textarea { resize: vertical; }
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(93, 62, 255, 0.1);
+        }
+        .field-hint {
+            color: #777;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .counter {
+            color: #777;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-top: 6px;
+        }
+        .image-preview {
+            width: 100%;
+            height: 180px;
+            border: 2px dashed #d7d7e6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            background-size: cover;
+            background-position: center;
+        }
+        .chip-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            padding: 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+        }
+        .chip-input input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            min-width: 140px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+        }
+        .chip {
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chip .remove { cursor: pointer; }
+        .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            padding-top: 10px;
+        }
+        .btn-secondary {
+            background: #ffffff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+        }
+        .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(93,62,255,0.15); }
+        .btn-danger {
+            background: #fff1f2;
+            color: #be123c;
+            border: 2px solid #fecdd3;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .split-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.page-subtitle-create{
+    text-align: center;
+}
+ 
+       
+        .page-hero .deco-circle { position: absolute; border-radius: 50%; background-color: var(--primary-color); opacity: 0.15; animation: float 6s ease-in-out infinite; }
+        .page-hero .circle-a { top: -40px; left: 6%; width: 120px; height: 120px; }
+        .page-hero .circle-b { top: 30%; right: 7%; width: 80px; height: 80px; animation-duration: 9s; animation-delay: -2s; }
+        .page-hero .circle-c { bottom: -30px; left: 12%; width: 60px; height: 60px; animation-duration: 7s; animation-delay: -3s; }
+        .page-hero .circle-d { top: 65vh; left: 6%; width: 120px; height: 120px; }
+        .page-hero .circle-e { top: 80vh; right: 7%; width: 100px; height: 100px; animation-duration: 9s; animation-delay: -2s; }
+       
+   
+        .footer-spacer { height: 30px; }
+    
+
+        @media (max-width: 992px) { .form-grid { grid-template-columns: 1fr; } }
+
+
+
+
+.site-footer {
+    background: linear-gradient(180deg, #0f172a 0%, #0b1222 100%);
+    color: #cbd5e1;
+    position: relative;
+    z-index: 3;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+}
+
+.footer-col.about { grid-column: span 5; }
+.footer-col.links { grid-column: span 2; }
+.footer-col.categories { grid-column: span 3; }
+.footer-col.contact { grid-column: span 2; }
+
+@media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: repeat(6, 1fr); }
+    .footer-col.about { grid-column: span 6; }
+    .footer-col.links { grid-column: span 3; }
+    .footer-col.categories { grid-column: span 3; }
+    .footer-col.contact { grid-column: span 6; }
+}
+
+@media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-col.about,
+    .footer-col.links,
+    .footer-col.categories,
+    .footer-col.contact { grid-column: auto; }
+}
+
+.footer-title {
+    color: #e2e8f0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-brand { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0 0.75rem 0; }
+.brand-logo { width: 40px; height: 40px; border-radius: 8px; background:#1e293b; display:flex; align-items:center; justify-content:center; color:#94a3b8; }
+.brand-name { font-weight: 800; color:#f8fafc; letter-spacing: 0.06em; }
+.brand-sub { font-size: 0.85rem; color:#94a3b8; }
+
+.footer-desc { color:#94a3b8; margin: 0.5rem 0 0.5rem 0; }
+.footer-read-more { color:#93c5fd; text-decoration: underline; }
+.footer-read-more:hover { color:#bfdbfe; }
+
+.footer-list { list-style: none; display: grid; gap: 0.5rem; padding-left: 0; }
+.footer-list li { display: flex; align-items: center; gap: 0.5rem; color:#cbd5e1; }
+.footer-list a { color:#cbd5e1; text-decoration: none; }
+.footer-list a:hover { color:#ffffff; }
+
+.footer-bottom { border-top: 1px solid rgba(148, 163, 184, 0.2); margin-top: 2rem; padding-top: 1rem; text-align: center; color:#94a3b8; }
+
+
+
+
+
+    </style>
+
+
+   
+   
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+             
+    <nav class="navbar">
+        <div class="nav-brand">POSTIFY</div>
+        <div class="nav-links">
+            <a href="HomeAfterlogin.html" class="nav-link active">Home</a>
+            <a href="ForYou.html" class="nav-link">Articles</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="index1.html" class="nav-link">Log Out</a>
+          
+        </div>
+        <div class="mobile-menu">
+            <button class="search-btn-mobile">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="deco-circle circle-a"></div>
+            <div class="deco-circle circle-b"></div>
+            <div class="deco-circle circle-c"></div>
+             <div class="deco-circle circle-d"></div>
+            <div class="deco-circle circle-e"></div>
+            <div class="deco-circle circle-f"></div>
+            <div class="container">
+                <h1 class="page-title">Create Your Blog</h1>
+                <p class="page-subtitle-create">Write, design and publish your story with Postify</p>
+            </div>
+        </section>
+
+        <section class="create-form-wrapper">
+            <div class="create-form-card">
+                <div class="create-form-header">
+                    <div class="icon"><i class="fa-solid fa-pen-nib"></i></div>
+                    <div>
+                        <h2>New Blog Post</h2>
+                        <div class="field-hint">Fill in the details below. You can save as draft anytime.</div>
+                    </div>
+                </div>
+                <div class="create-form-body">
+                    <form id="createBlogForm">
+                        <div class="form-grid">
+                            <div class="form-section">
+                                <h3 class="section-title">Content</h3>
+                                <div class="input-group">
+                                    <label for="title">Title</label>
+                                    <input type="text" id="title" name="title" placeholder="Catchy blog title" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="shortDescription">Short Description</label>
+                                    <textarea id="shortDescription" name="shortDescription" rows="3" maxlength="300" placeholder="One or two lines that summarize your blog" required></textarea>
+                                    <div class="counter" id="descCounter">0/300</div>
+                                </div>
+                                <div class="input-group">
+                                    <label for="content">Main Content</label>
+                                    <textarea id="content" name="content" rows="12" placeholder="Start writing your story..." required></textarea>
+                                    <div class="counter" id="wordCounter">0 words</div>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <h3 class="section-title">Details</h3>
+                                <div class="input-group">
+                                    <label for="category">Category</label>
+                                    <select id="category" name="category" required>
+                                        <option value="">Select a category</option>
+                                        <option>Technology</option>
+                                        <option>Environment</option>
+                                        <option>Business</option>
+                                        <option>AI</option>
+                                        <option>Climate</option>
+                                        <option>Space</option>
+                                        <option>Crypto</option>
+                                        <option>Energy</option>
+                                        <option>Education</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="coverUrl">Cover Image URL</label>
+                                    <input type="url" id="coverUrl" name="coverUrl" placeholder="https://...">
+                                    <div class="field-hint">Paste an image link to preview below.</div>
+                                </div>
+                                <div class="input-group">
+                                    <div class="image-preview" id="coverPreview">Cover image preview</div>
+                                </div>
+                                <div class="input-group">
+                                    <label>Tags</label>
+                                    <div class="chip-input" id="tagsContainer">
+                                        <input type="text" id="tagInput" placeholder="Type a tag and press Enter">
+                                    </div>
+                                    <div class="field-hint">Add keywords like: webdev, design, startups</div>
+                                </div>
+                                <div class="split-row">
+                                    <div class="input-group">
+                                        <label for="readingTime">Reading Time (mins)</label>
+                                        <input type="number" id="readingTime" name="readingTime" min="1" placeholder="e.g. 5">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="status">Status</label>
+                                        <select id="status" name="status">
+                                            <option>Draft</option>
+                                            <option selected>Publish</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button id="previewBtn" class="btn-secondary" type="button"><i class="fa-regular fa-eye"></i> Preview</button>
+                            <button id="draftBtn" class="btn-secondary" type="button">Save Draft</button>
+                            <button class="cta-button" type="submit">Publish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer-spacer"></div>
+    </main>
+
+  
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col about">
+                    <h3 class="footer-title">About Postify</h3>
+                    <div class="footer-brand">
+                        <div class="brand-logo">⦿</div>
+                        <div class="brand-text">
+                            <div class="brand-name">POSTIFY</div>
+                            <div class="brand-sub">Create Your Own Blogs</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Integer ac lorem sit amet est rhoncus dapi bus don cad pede acus morbi elit nunc molestie at ultrices eu eleifen lorem ut dictum erat masa...</p>
+                    <a href="#" class="footer-read-more">Read More</a>
+                </div>
+                <div class="footer-col links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col categories">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list">
+                        <li>Electronics</li>
+                        <li>Vehicles</li>
+                        <li>Bikes</li>
+                        <li>Animals</li>
+                        <li>Toys</li>
+                        <li>Furniture</li>
+                        <li>Marketing</li>
+                        <li>Technology</li>
+                    </ul>
+                </div>
+                <div class="footer-col contact">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list contact-list">
+                        <li>Chitkara University</li>
+                        <li>☎ 91+ 9306512657</li>
+                        <li>☎ (123) 456 7890</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Copyright © 2025 POSTIFY - All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+</body>
+
+ <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', function () {
+            const desc = document.getElementById('shortDescription');
+            const descCounter = document.getElementById('descCounter');
+            const content = document.getElementById('content');
+            const wordCounter = document.getElementById('wordCounter');
+            const coverUrl = document.getElementById('coverUrl');
+            const coverPreview = document.getElementById('coverPreview');
+            const tagsContainer = document.getElementById('tagsContainer');
+            const tagInput = document.getElementById('tagInput');
+
+            function updateDescCounter() {
+                const max = 300;
+                const len = desc.value.length;
+                if (descCounter) descCounter.textContent = len + '/' + max;
+            }
+            function updateWordCounter() {
+                const words = content.value.trim().split(/\s+/).filter(Boolean);
+                if (wordCounter) wordCounter.textContent = words.length + ' words';
+            }
+            function updateCoverPreview() {
+                const url = coverUrl.value.trim();
+                if (!url) {
+                    coverPreview.style.backgroundImage = '';
+                    coverPreview.textContent = 'Cover image preview';
+                    return;
+                }
+                coverPreview.style.backgroundImage = 'url(' + url + ')';
+                coverPreview.textContent = '';
+            }
+
+
+            if (desc) {
+                desc.addEventListener('input', updateDescCounter);
+                updateDescCounter();
+            }
+            if (content) {
+                content.addEventListener('input', updateWordCounter);
+                updateWordCounter();
+            }
+            if (coverUrl && coverPreview) {
+                coverUrl.addEventListener('input', updateCoverPreview);
+                updateCoverPreview();
+            }
+
+            
+            // function createTagChip(text) {
+            //     const trimmed = text.trim().replace(/^#/, '');
+            //     if (!trimmed) return;
+            //     const chip = document.createElement('span');
+            //     chip.className = 'chip';
+            //     chip.innerHTML = '<span>#' + trimmed + '</span><span class="remove" aria-label="Remove tag">&times;</span>';
+            //     chip.querySelector('.remove').addEventListener('click', () => chip.remove());
+            //     tagsContainer.insertBefore(chip, tagInput.parentElement);
+            // }
+            // if (tagInput && tagsContainer) {
+            //     tagInput.addEventListener('keydown', function (e) {
+            //         if (e.key === 'Enter' || e.key === ',' ) {
+            //             e.preventDefault();
+            //             createTagChip(tagInput.value);
+            //             tagInput.value = '';
+            //         }
+            //         if (e.key === 'Backspace' && !tagInput.value) {
+            //             const chips = tagsContainer.querySelectorAll('.chip');
+            //             if (chips.length) chips[chips.length - 1].remove();
+            //         }
+            //     });
+            // }
+
+            const form = document.getElementById('createBlogForm');
+            const previewBtn = document.getElementById('previewBtn');
+            const draftBtn = document.getElementById('draftBtn');
+
+            function celebrate() {
+                confetti({ particleCount: 140, spread: 120, origin: { y: 0.6 } });
+            }
+
+            if (previewBtn) {
+                previewBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+            if (draftBtn) {
+                draftBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    alert('Draft saved locally (simulation).');
+                });
+            }
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    celebrate();
+                    setTimeout(() => alert('Your blog is published! (demo)'), 400);
+                });
+            }
+        });
+    </script>
+</html>
+
+

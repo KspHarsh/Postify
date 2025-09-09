@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postify - Article Page</title>
+    <link rel="stylesheet" href="article.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="nav-brand">POSTIFY</div>
+        <div class="nav-links">
+            <a href="index1.html" class="nav-link active">Home</a>
+            <a href="HomeAfterlogin.html" class="nav-link">Articles</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="index1.html" class="nav-link">Log Out</a>
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="mobile-menu">
+            <button class="search-btn-mobile">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+  
+    <div class="main-container">
+      
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+            <div class="shape shape-6"></div>
+            <div class="shape shape-7"></div>
+            <div class="shape shape-8"></div>
+        </div>
+
+        <div class="content-wrapper">
+         
+            <aside class="sidebar">
+              
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">For you</h3>
+                    <div class="articles-list">
+                        <a href="#" class="article-item">
+                            <img src="ENVIRON.png" alt="Climate crisis" class="article-thumb">
+                            <div class="article-info">
+                                <h4 class="article-title">The climate crisis and the psychological burden of living in a dying world</h4>
+                                <p class="article-author">Alex Chen</p>
+                                <span class="article-category">Environment</span>
+                            </div>
+                        </a>
+                        <a href="" class="article-item">
+                            <img src="GADETS.png" alt="Benefits of thinking" class="article-thumb">
+                            <div class="article-info">
+                                <h4 class="article-title">The untethered benefits of thinking on paper as we age</h4>
+                                <p class="article-author">Maria Santos</p>
+                                <span class="article-category">Health</span>
+                            </div>
+                        </a>
+                        <a href="#" class="article-item">
+                            <img src="TECH.png" alt="Building better" class="article-thumb">
+                            <div class="article-info">
+                                <h4 class="article-title">Building Better: Five Brutality Challenged Ideas</h4>
+                                <p class="article-author">John Smith</p>
+                                <span class="article-category">Design</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+             
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">Trending</h3>
+                    <div class="trending-list">
+                        <a href="#" class="trending-item">
+                            <span class="trending-number">01</span>
+                            <div class="trending-info">
+                                <h4 class="trending-title">The climate crisis and the psychological burden of living in a dying world</h4>
+                                <p class="trending-author">Alex Chen</p>
+                            </div>
+                        </a>
+                        <a href="#" class="trending-item">
+                            <span class="trending-number">02</span>
+                            <div class="trending-info">
+                                <h4 class="trending-title">The untethered benefits of thinking on paper as we age</h4>
+                                <p class="trending-author">Maria Santos</p>
+                            </div>
+                        </a>
+                        <a href="#" class="trending-item">
+                            <span class="trending-number">03</span>
+                            <div class="trending-info">
+                                <h4 class="trending-title">Building Better: Five Brutality Challenged Ideas</h4>
+                                <p class="trending-author">John Smith</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+               
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">Recommended topics</h3>
+                    <div class="topics-list">
+                        <span class="topic-tag">Technology</span>
+                        <span class="topic-tag">AI</span>
+                        <span class="topic-tag">Science</span>
+                        <span class="topic-tag">Future</span>
+                        <span class="topic-tag">Innovation</span>
+                    </div>
+                </div>
+            </aside>
+
+            
+            <main class="main-article">
+                <article class="article-card">
+                    
+                    <div class="article-header">
+                        <img src="ENVIRON.png" alt="Joana Marie Jones" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name-section">
+                                <h3 class="author-name">Joana Marie Jones</h3>
+                                <span class="follow-btn">Follow</span>
+                            </div>
+                            <div class="publish-info">
+                                <div class="publish-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>PUBLISHED THU, DEC 1 2022 5:09 AM EST</span>
+                                </div>
+                                <span class="separator">•</span>
+                                <span>UPDATED THU, DEC 1 2022 10:38 AM EST</span>
+                            </div>
+                        </div>
+                        <div class="social-buttons">
+                            <button class="social-btn" onclick="shareToFacebook()">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                            <button class="social-btn" onclick="shareToTwitter()">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                            <button class="social-btn" onclick="shareToLinkedIn()">
+                                <i class="fab fa-linkedin-in"></i>
+                            </button>
+                            <button class="social-btn" onclick="shareArticle()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+
+             
+                    <h1 class="article-main-title">
+                        Elon Musk shows off updates to his brain chips and says he's going to install one in himself when they are ready
+                    </h1>
+
+             
+                    <div class="article-image-section">
+                        <img src="./TECH.png" class="article-main-image" alt="Article main image">
+                        <p class="image-caption">
+                            Neuralink logo displayed on a phone screen, a silhouette of a paper in shape of a human face and a binary code displayed on a screen are seen in this multiple exposure illustration photo taken in Krakow, Poland on December 10, 2023.
+                        </p>
+                    </div>
+
+                 
+                    <div class="article-content">
+                        <p>
+                            Elon Musk shows off updates to his brain chips and says he's going to install one in himself when they are ready. Neuralink Corporation's inaugural recruitment event Wednesday night. Musk said during the event that he plans to get one of the implants himself.
+                        </p>
+
+                        <p>
+                            Musk said two of the company's applications will aim to restore vision, even for people who were born blind, and a third application will focus on the motor cortex, restoring "full body functionality" for people with severed spinal cords. "We're confident there are no physical limitations to restoring full body functionality," Musk said.
+                        </p>
+
+                        <p>
+                            Neuralink could begin to test the motor cortex technology in humans in as soon as six months, Musk said.
+                        </p>
+
+                        <p>
+                            "Obviously, we want to be extremely careful and certain that it will work well before putting a device in a human, but we're submitted, I think, most of our paperwork to the FDA," he said.
+                        </p>
+
+                        <p>
+                            Musk also said he plans to get one himself. "You could have a Neuralink device implanted right now and you wouldn't even know. I mean, hypothetically ... In fact, in one of these demos, I will," he said. He reiterated that on Twitter after the event.
+                        </p>
+
+                        <p>
+                            Since none of Neuralink's devices have been tested on humans or approved by the FDA, Wednesday's announcements warrant skepticism, said Xing Chen, assistant professor in the Department of Ophthalmology at the University of Pittsburgh School of Medicine.
+                        </p>
+                    </div>
+
+                    <div class="article-actions">
+                        <div class="action-group">
+                            <button class="action-btn" onclick="likeArticle()">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span class="like-count">245</span>
+                            </button>
+                            <button class="action-btn" onclick="openComments()">
+                                <i class="fas fa-comment"></i>
+                                <span>12</span>
+                            </button>
+                            <button class="action-btn" onclick="shareArticle()">
+                                <i class="fas fa-share-alt"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                        <button class="action-btn" onclick="saveArticle()">
+                            <i class="fas fa-bookmark"></i>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col about">
+                    <h3 class="footer-title">About Classify</h3>
+                    <div class="footer-brand">
+                        <div class="brand-logo">⦿</div>
+                        <div class="brand-text">
+                            <div class="brand-name">CLASSIFIED</div>
+                            <div class="brand-sub">Listing ads Portal</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Integer ac lorem sit amet est rhoncus dapi bus don cad pede acus morbi elit nunc molestie at ultrices eu eleifen lorem ut dictum erat masa...</p>
+                    <a href="#" class="footer-read-more">Read More</a>
+                </div>
+                <div class="footer-col links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col categories">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list">
+                        <li>Electronics</li>
+                        <li>Vehicles</li>
+                        
+                        <li>Marketing</li>
+                        <li>Technology</li>
+                    </ul>
+                </div>
+                <div class="footer-col contact">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list contact-list">
+                        <li>📍 Lorem # 38, Ispum Hill, Lorem, WA 12345</li>
+                        <li>☎ (777) 123 4567</li>
+                        <li>☎ (123) 456 7890</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Copyright © 2017 Classify - All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <section class="bg-circles-container">
+                    <div class="deco-circle circle-1"></div>
+                    <div class="deco-circle circle-2"></div>
+                    <div class="deco-circle circle-3"></div>
+                    <div class="deco-circle circle-4"></div>
+                    <div class="deco-circle circle-5"></div>
+                </section>
+  
+</body>
+</html>

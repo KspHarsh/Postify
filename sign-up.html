@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postify - Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/index.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #5d3eff;
+            --dark-color: #1a1a1a;
+            --light-gray-color: #f7f7f9;
+            --white-color: #ffffff;
+            --text-color: #333333;
+            --nav-link-color: #555555;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+       
+        .main-header { padding: 20px 0; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--dark-color); text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links { display: flex; list-style: none; margin: 0; padding: 0; gap: 40px; }
+        .nav-links a { text-decoration: none; color: var(--nav-link-color); font-weight: 600; font-size: 1rem; transition: color 0.3s ease; }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary-color); }
+
+    
+        .hero-section { position: relative; padding: 60px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px) translateX(10px); }
+            100% { transform: translateY(0px); }
+        }
+        .deco-circle { position: absolute; background-color: var(--primary-color); border-radius: 50%; opacity: 0.9; z-index: 0; animation: float 6s ease-in-out infinite; }
+        .circle-1 { top: -30px; left: 5%; width: 160px; height: 160px; animation-duration: 7s; }
+        .circle-2 { top: 40%; left: 12%; width: 80px; height: 80px; animation-duration: 9s; animation-delay: -2s; }
+        .circle-3 { bottom: 10%; left: 8%; width: 60px; height: 60px; animation-duration: 6s; animation-delay: -4s; }
+        .circle-4 { top: -40px; right: 5%; width: 140px; height: 140px; animation-duration: 8s; animation-delay: -1s; }
+        .circle-5 { bottom: 15%; right: 7%; width: 100px; height: 100px; animation-duration: 10s; animation-delay: -5s; }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white-color);
+            border-radius: 90px;
+            padding: 60px 80px;
+            width: 70%;
+            min-height: 400px;
+            box-shadow: 5px 10px 40px rgba(93, 62, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hero-content:hover { transform: scale(1.05); box-shadow: 5px 15px 50px rgba(93, 62, 255, 0.3); }
+        .hero-image { flex: 1 1 45%; }
+        .hero-image img { width: 125%; max-width: 700px; height: auto; border-radius: 90px; display: block; object-fit: cover; position: relative; z-index: 1; transform: translateX(-10%); }
+
+        .login-form-wrapper { flex: 1 1 55%; padding-left: 50px; text-align: left; }
+        .login-form-wrapper h2 { font-size: 2.8rem; font-weight: 700; color: var(--dark-color); margin: 0 0 10px 0; }
+        .login-form-wrapper h3 { color: var(--nav-link-color); margin-bottom: 30px; font-size: 1.1rem; font-weight: 400; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-weight: 600; color: var(--nav-link-color); margin-bottom: 8px; }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
+        .input-group input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(93, 62, 255, 0.2); }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        .cta-button:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(93, 62, 255, 0.4); }
+        .cta-button:active { transform: scale(0.95); }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+    
+        .social-divider { text-align: center; margin: 25px 0; color: var(--nav-link-color); }
+        .social-login-icons { display: flex; justify-content: center; gap: 20px; }
+        .social-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 45px; height: 45px;
+            border: 1px solid var(--border-color); border-radius: 50%;
+            color: var(--text-color); font-size: 1.1rem;
+            transition: all 0.3s ease; text-decoration: none;
+        }
+        .social-icon:hover { background-color: var(--primary-color); color: var(--white-color); border-color: var(--primary-color); }
+
+     
+        @media (max-width: 992px) {
+            .hero-content { flex-direction: column; text-align: center; border-radius: 20px; padding: 40px; }
+            .login-form-wrapper { padding-left: 0; padding-top: 30px; text-align: center; }
+            .hero-image { display: none; }
+            .circle-2, .circle-3 { display: none; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .login-form-wrapper h2 { font-size: 2.2rem; }
+            .hero-content { width: 90%; }
+            .circle-1, .circle-4, .circle-5 { width: 100px; height: 100px; }
+        }
+    </style>
+</head>
+<body>
+<header class="main-header">
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">Postify</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Articles</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="login.html" class="active">Log In</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+<section class="hero-section">
+    <div class="deco-circle circle-1"></div>
+    <div class="deco-circle circle-2"></div>
+    <div class="deco-circle circle-3"></div>
+    <div class="deco-circle circle-4"></div>
+    <div class="deco-circle circle-5"></div>
+
+    <div class="hero-content">
+        <div class="hero-image">
+            <img src="FrontGirl.png" alt="Woman working on a laptop">
+        </div>
+        <div class="login-form-wrapper">
+            <h2 id="my-heading"></h2>
+            <h3>Enter Details to access your Account.</h3>
+            <form action="#">
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+            
+                <button type="button" class="cta-button" id="loginBtn">Sign Up</button>
+            </form>
+            <div class="social-divider"><span>OR</span></div>
+            <div class="social-login-icons">
+                <a href="#" class="social-icon" aria-label="Login with Google"><i class="fab fa-google"></i></a>
+                <a href="#" class="social-icon" aria-label="Login with Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon" aria-label="Login with GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-icon" aria-label="Login with Apple"><i class="fab fa-apple"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const myTypeItInstance = new TypeIt('#my-heading', {
+        speed: 100,
+        waitUntilVisible: true,
+        loop: true,
+        afterComplete: async (instance) => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            instance.reset();
+            instance.go();
+        }
+    })
+    .type('Create Account ')
+    .go();
+
+    const loginBtn = document.getElementById("loginBtn");
+
+    loginBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+     
+        if (!email.includes("@")) {
+            alert("Please enter a valid email address containing '@'.");
+            return;
+        }
+
+   
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+         
+                localStorage.setItem("userEmail", email);
+                localStorage.setItem("userPassword", password);
+
+        
+        confetti({
+            particleCount: 200,
+            spread: 200,
+            origin: { y: 0.7 }
+        });
+
+        alert("Account created successfully!");
+
+       
+        setTimeout(() => {
+            window.location.href = "HomeAfterlogin.html";
+        }, 1000);
+    });
+});
+</script>
+
+</body>
+</html>
