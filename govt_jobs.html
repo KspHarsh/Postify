@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" type="image/png" href="Logo.png">
+  <title>Postify</title>
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="logo">Postify</div>
+        <ul class="nav-links">
+          <li><a href="govt_jobs.html" class="nav-link">Home</a></li>
+          <li><a href="govt_jobs.html" class="nav-link active">Government Jobs</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="login.html" class="nav-link">Login</a></li>
+          <li><a href="sign-up.html" class="nav-link">Sign Up</a></li>
+        </ul>
+        <!-- <div class="search-icon">
+          <i class="fas fa-search"></i>
+        </div> -->
+        <div class="hamburger-menu">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+
+    <div class="mobile-menu-overlay">
+      <div class="mobile-menu-sidebar">
+        <div class="close-menu">
+          <i class="fas fa-times"></i>
+        </div>
+        <ul class="mobile-nav-links">
+          <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+          <li><a href="govt_jobs.html" class="mobile-nav-link active">Government Jobs</a></li>
+          <li><a href="about.html" class="mobile-nav-link">About</a></li>
+          <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+          <li><a href="login.html" class="mobile-nav-link">Login</a></li>
+          <li><a href="sign-up.html" class="mobile-nav-link">Sign Up</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px;">
+      <h1>Latest Government Jobs — India (2025)</h1>
+      <p class="lead">Daily updated list of central & state recruitments, deadlines and vacancies. Search, filter and export the list.</p>
+    </div>
+
+    <section class="card" aria-label="controls">
+      <div class="controls">
+        <input id="searchBox" type="text" placeholder="Search by recruitment name or organisation..." />
+        <select id="vacancyFilter">
+          <option value="all">All vacancies</option>
+          <option value="1000+">1000+ vacancies</option>
+          <option value="10000+">10000+ vacancies</option>
+        </select>
+        <input id="startDate" type="date" />
+        <input id="endDate" type="date" />
+        <button id="clearFilters" class="muted">Clear</button>
+        <div style="margin-left:auto;display:flex;gap:8px">
+          <button id="sortBtn" title="Sort by start date">Sort: <span id="sortState">Newest</span></button>
+          <button id="downloadCsv">Download CSV</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="jobsCard">
+      <table id="jobsTable" aria-label="List of government jobs">
+        <thead>
+          <tr>
+            <th style="width:46%">Recruitment</th>
+            <th style="width:18%">Start Date</th>
+            <th style="width:18%">Last Date</th>
+            <th style="width:12%">Vacancies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- rows injected by JS -->
+        </tbody>
+      </table>
+      <footer>Tip: Click any row to view details and open official notification link (if available).</footer>
+    </section>
+
+    <!-- modal -->
+    <div class="modal" id="modal">
+      <div class="box" role="dialog" aria-modal="true">
+        <button class="close" id="modalClose">✕</button>
+        <div id="modalContent">  </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Data: derived from the user's supplied list (subset but representative)
+    const jobs = [
+      {title:"IB JIO Recruitment 2025", start:"2025-08-23", last:"2025-09-14", vacancies:394, org:"IB", link: "#"},
+      {title:"RRB Section Controller Recruitment 2025", start:"2025-09-15", last:"2025-10-14", vacancies:368, org:"RRB", link: "#"},
+      {title:"Punjab and Sind Bank LBO Recruitment 2025", start:"2025-08-20", last:"2025-09-04", vacancies:750, org:"Punjab & Sind Bank", link: "#"},
+      {title:"NIACL AO 2025 Notification", start:"2025-08-07", last:"2025-08-30", vacancies:550, org:"NIACL", link: "#"},
+      {title:"SBI Clerk 2025 Notification", start:"2025-08-06", last:"2025-08-26", vacancies:6589, org:"SBI", link: "#"},
+      {title:"BSSC Office Attendant Vacancy 2025", start:"2025-08-25", last:"2025-09-26", vacancies:3727, org:"BSSC", link: "#"},
+      {title:"IBPS Clerk 2025 Notification", start:"2025-08-01", last:"2025-08-21", vacancies:10277, org:"IBPS", link: "#"},
+      {title:"IB Security Assistant Recruitment 2025", start:"2025-07-26", last:"2025-08-17", vacancies:4987, org:"IB", link: "#"},
+      {title:"UPSC EPFO 2025 — EO/AO & APFC", start:"2025-07-29", last:"2025-08-18", vacancies:230, org:"UPSC", link: "#"},
+      {title:"Rajasthan 1st Grade Teacher Notification 2025", start:"2025-08-14", last:"2025-09-12", vacancies:3225, org:"Rajasthan Education", link: "#"},
+      {title:"Rajasthan 2nd Grade Teacher Notification 2025", start:"2025-08-19", last:"2025-09-17", vacancies:3225, org:"Rajasthan Education", link: "#"},
+      {title:"REET Mains Notification 2025", start:"2025-08-01", last:"2025-09-01", vacancies:7759, org:"Rajasthan", link: "#"},
+      {title:"TNPSC Group 2 Notification 2025", start:"2025-07-15", last:"2025-08-13", vacancies:645, org:"TNPSC", link: "#"},
+      {title:"UP LT Grade Teacher Notification 2025", start:"2025-07-28", last:"2025-08-28", vacancies:7466, org:"UP Education", link: "#"},
+      {title:"IB ACIO Recruitment 2025", start:"2025-07-19", last:"2025-08-10", vacancies:3717, org:"IB", link: "#"},
+      {title:"SIDBI Grade A & B Notification 2025", start:"2025-07-14", last:"2025-08-11", vacancies:76, org:"SIDBI", link: "#"},
+      {title:"AIIMS CRE Notification 2025", start:"2025-07-12", last:"2025-08-31", vacancies:2300, org:"AIIMS", link: "#"},
+      {title:"MP TET Varg 2 Notification 2025", start:"2025-07-18", last:"2025-08-31", vacancies:18650, org:"MP Education", link: "#"},
+      {title:"BHEL Artisan Recruitment 2025", start:"2025-07-16", last:"2025-08-12", vacancies:515, org:"BHEL", link: "#"},
+      {title:"CCRAS Recruitment 2025", start:"2025-08-01", last:"2025-08-31", vacancies:394, org:"CCRAS", link: "#"},
+      {title:"DSSSB Jail Warder Recruitment 2025", start:"2025-07-08", last:"2025-08-07", vacancies:1676, org:"DSSSB", link: "#"},
+      {title:"Bank of Baroda LBO Recruitment 2025", start:"2025-07-04", last:"2025-07-24", vacancies:2500, org:"Bank of Baroda", link: "#"},
+      {title:"BTSC Nursing Tutor Vacancy 2025", start:"2025-07-04", last:"2025-08-01", vacancies:498, org:"BTSC", link: "#"},
+      {title:"MPPSC Food Safety Officer Recruitment 2025", start:"2025-07-11", last:"2025-08-10", vacancies:120, org:"MPPSC", link: "#"},
+      {title:"IBPS PO Notification 2025", start:"2025-07-01", last:"2025-07-21", vacancies:5208, org:"IBPS", link: "#"},
+      {title:"IBPS SO Notification 2025", start:"2025-07-01", last:"2025-07-21", vacancies:1007, org:"IBPS", link: "#"},
+      {title:"SSC JE Notification 2025", start:"2025-06-30", last:"2025-07-21", vacancies:1340, org:"SSC", link: "#"},
+      {title:"SSC CGL Notification 2025", start:"2025-06-09", last:"2025-07-04", vacancies:14582, org:"SSC", link: "#"},
+      {title:"SBI PO Notification 2025", start:"2025-06-24", last:"2025-07-14", vacancies:541, org:"SBI", link: "#"},
+      {title:"SSC GD Notification 2025", start:"2025-08-20", last:"2025-09-11", vacancies:53690, org:"SSC" , link : "ssc.html"},
+    ];
+
+    // helpers
+    const tbody = document.querySelector('#jobsTable tbody');
+    const searchBox = document.getElementById('searchBox');
+    const vacancyFilter = document.getElementById('vacancyFilter');
+    const startDate = document.getElementById('startDate');
+    const endDate = document.getElementById('endDate');
+    const clearFilters = document.getElementById('clearFilters');
+    const sortBtn = document.getElementById('sortBtn');
+    const sortStateSpan = document.getElementById('sortState');
+    const downloadCsv = document.getElementById('downloadCsv');
+
+    let sortDesc = true; // newest first
+
+    function render(rows){
+      tbody.innerHTML = '';
+      if(!rows.length){
+        tbody.innerHTML = '<tr><td colspan="4" style="color:var(--muted);padding:30px;text-align:center">No results found.</td></tr>';
+        return;
+      }
+      rows.forEach(job=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><div class="job-title">${escapeHtml(job.title)} <span class="tag">${escapeHtml(job.org)}</span></div></td>
+          <td><div class="date">${formatDate(job.start)}</div></td>
+          <td><div class="date">${formatDate(job.last)}</div></td>
+          <td><div class="vacancy">${numberWithCommas(job.vacancies)}</div></td>
+        `;
+        tr.addEventListener('click',()=>openModal(job));
+        tbody.appendChild(tr);
+      });
+    }
+
+    function formatDate(s){
+      try{ const d=new Date(s+'T00:00:00'); return d.toLocaleDateString(); }catch(e){return s}
+    }
+    function numberWithCommas(x){ return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,","); }
+    function escapeHtml(str){ return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    function applyFilters(){
+      const q = searchBox.value.trim().toLowerCase();
+      const vacFilter = vacancyFilter.value;
+      const sDate = startDate.value;
+      const eDate = endDate.value;
+
+      let out = jobs.filter(j=>{
+        if(q){
+          const hay = (j.title + ' ' + j.org).toLowerCase();
+          if(!hay.includes(q)) return false;
+        }
+        if(vacFilter === '1000+' && j.vacancies < 1000) return false;
+        if(vacFilter === '10000+' && j.vacancies < 10000) return false;
+        if(sDate){ if(new Date(j.start) < new Date(sDate)) return false; }
+        if(eDate){ if(new Date(j.last) > new Date(eDate)) return false; }
+        return true;
+      });
+
+      out.sort((a,b)=> sortDesc ? new Date(b.start)-new Date(a.start) : new Date(a.start)-new Date(b.start));
+      render(out);
+    }
+
+    // sort toggle
+    sortBtn.addEventListener('click',()=>{ sortDesc = !sortDesc; sortStateSpan.textContent = sortDesc? 'Newest':'Oldest'; applyFilters(); });
+
+    [searchBox,vacancyFilter,startDate,endDate].forEach(el=>el.addEventListener('input',applyFilters));
+    clearFilters.addEventListener('click',()=>{ searchBox.value=''; vacancyFilter.value='all'; startDate.value=''; endDate.value=''; applyFilters(); });
+
+    // modal
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+    function openModal(job){
+      modalContent.innerHTML = `
+        <h2 style="margin:0 0 8px">${escapeHtml(job.title)}</h2>
+        <div style="color:var(--muted);margin-bottom:8px">Organisation: <strong>${escapeHtml(job.org)}</strong></div>
+        <div style="display:flex;gap:12px;margin-bottom:12px">
+          <div><strong>Start:</strong><div class="date">${formatDate(job.start)}</div></div>
+          <div><strong>Last Date:</strong><div class="date">${formatDate(job.last)}</div></div>
+          <div style="margin-left:auto"><strong>Vacancies:</strong><div class="vacancy">${numberWithCommas(job.vacancies)}</div></div>
+        </div>
+        <p style="color:var(--muted);line-height:1.45;margin-bottom:14px">You can open the official notification on the respective recruitment website.</p>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          ${job.link ? `<a href="${job.link}" target="_blank" class="button">Apply Now</a>` : ''}
+          <button class="button" id="modalCloseBtn">Close</button>
+        </div>
+      `;
+      modal.style.display='flex';
+      document.getElementById('modalCloseBtn').addEventListener('click',closeModal);
+    }
+    function closeModal(){ modal.style.display='none'; }
+    modalClose.addEventListener('click',closeModal);
+    modal.addEventListener('click',(e)=>{ if(e.target===modal) closeModal(); });
+
+    // CSV download
+    downloadCsv.addEventListener('click',()=>{
+      const rows = Array.from(document.querySelectorAll('#jobsTable tbody tr')).filter(r=>!r.querySelector('td') || r.querySelectorAll('td').length);
+      const csv = ['Recruitment,Organisation,Start Date,Last Date,Vacancies'];
+      jobs.forEach(j=> csv.push(`"${j.title.replace(/"/g,'""')}","${j.org}",${j.start},${j.last},${j.vacancies}`));
+      const blob = new Blob([csv.join('\n')],{type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='govt-jobs-2025.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // initial render
+    applyFilters();
+
+    // Mobile menu functionality
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+    const closeMenu = document.querySelector('.close-menu');
+
+    hamburgerMenu.addEventListener('click', () => {
+      mobileMenuOverlay.classList.add('active');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenuOverlay.classList.remove('active');
+    });
+
+    mobileMenuOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileMenuOverlay) {
+        mobileMenuOverlay.classList.remove('active');
+      }
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuOverlay.classList.remove('active');
+      });
+    });
+  </script>
+  <style>
+    .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal .box {
+      background-color: var(--white-color);
+      margin: auto;
+      padding: 20px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 700px;
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+      color: var(--text-color);
+    }
+    .modal .close {
+      color: var(--primary-color);
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      z-index: 1001;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      background: none;
+      border: none;
+    }
+    .modal .close:hover,
+    .modal .close:focus {
+      color: var(--primary-color);
+    }
+    .button {
+      background-color: var(--primary-color);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: var(--white-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none; /* For anchor tags */
+      display: inline-block; /* For anchor tags */
+      text-align: center;
+    }
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(93, 62, 255, 0.2);
+    }
+    @keyframes modalSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .card {
+      background-color: var(--white-color);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(93, 62, 255, 0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .controls input[type=text],
+    .controls select,
+    .controls input[type=date] {
+      background-color: var(--light-gray-color);
+      border: 1px solid #e0e0e0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+    }
+    .controls button {
+      background-color: var(--primary-color);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: var(--white-color);
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .controls button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(93, 62, 255, 0.2);
+    }
+    .controls .muted {
+      background-color: transparent;
+      border: 1px solid var(--nav-link-color);
+      color: var(--nav-link-color);
+      max-width: 30%;
+    }
+    .controls .muted:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      transform: translateY(-2px);
+      box-shadow: none;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      background-color: var(--white-color);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    th,
+    td {
+      padding: 12px 8px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 14px;
+      color: var(--text-color);
+    }
+    th {
+      background-color: var(--light-gray-color);
+      color: var(--dark-color);
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    tr:hover td {
+      background-color: #f5f5f5;
+    }
+    .vacancy {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    .date {
+      color: var(--nav-link-color);
+      font-size: 13px;
+    }
+    .job-title {
+      font-weight: 700;
+      color: var(--dark-color);
+    }
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background-color: rgba(93, 62, 255, 0.1);
+      font-size: 12px;
+      color: var(--primary-color);
+      margin-left: 8px;
+      font-weight: 500;
+    }
+    footer {
+      color: var(--nav-link-color);
+      font-size: 13px;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col about">
+          <div class="footer-brand">
+            <div class="brand-logo">P</div>
+            <div>
+              <div class="brand-name">Postify</div>
+              <div class="brand-sub">Your daily dose of knowledge</div>
+            </div>
+          </div>
+          <p class="footer-desc">Postify is your go-to platform for insightful articles and the latest updates. Join our community of readers and writers!</p>
+          <a href="#" class="footer-read-more">Read More</a>
+        </div>
+
+        <div class="footer-col links">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col categories">
+          <h3 class="footer-title">Categories</h3>
+          <ul class="footer-list">
+            <li><a href="ForYou.html">For You</a></li>
+            <li><a href="ssc.html">SSC</a></li>
+            <li><a href="govt_jobs.html">Government Jobs</a></li>
+            <li><a href="punjabfloodAr.html">Punjab Flood Article</a></li>
+            <li><a href="article.html">Technology</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col contact">
+          <h3 class="footer-title">Contact Us</h3>
+          <ul class="footer-list">
+            <li><i class="fas fa-map-marker-alt"></i> Karnal Haryana </li>
+            <li><i class="fas fa-phone"></i> +91 9306512657</li>
+            <li><i class="fas fa-envelope"></i> reportcenter43@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 Postify. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
