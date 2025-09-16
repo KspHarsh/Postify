@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="icon" type="image/png" href="Logo.png">
+    <title>Postify - SSC CGL</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<style>
+    /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background:  #ebefff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+a{
+    text-decoration: none;
+}
+
+/* Brand Colors */
+:root {
+    --primary-color: #5d3eff;
+    --brand-purple: #6366f1;
+    --brand-purple-light: #a5b4fc;
+    --brand-purple-dark: #4338ca;
+    --brand-blue: #3b82f6;
+    
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: #ebefff;
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--brand-purple);
+}
+
+.search-btn,
+.search-btn-mobile {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.search-btn:hover,
+.search-btn-mobile:hover {
+    color: var(--gray-900);
+}
+
+.mobile-menu {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hamburger-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger-btn span {
+    width: 1rem;
+    height: 2px;
+    background: var(--gray-600);
+    margin-bottom: 2px;
+    transition: background 0.2s;
+}
+
+.hamburger-btn:hover span {
+    background: var(--gray-900);
+}
+
+/* Main Container */
+.main-container {
+    position: relative;
+    min-height: 0;
+    overflow: hidden;
+    padding-top: 70px; /* space for fixed navbar */
+    padding-bottom: 0; /* footer is not fixed */
+    flex: 1;
+}
+
+/* Footer */
+.site-footer {
+    background: linear-gradient(180deg, #0f172a 0%, #0b1222 100%);
+    color: #cbd5e1;
+    position: relative;
+    z-index: 3;
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.footer-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+}
+
+.footer-col.about { grid-column: span 5; }
+.footer-col.links { grid-column: span 2; }
+.footer-col.categories { grid-column: span 3; }
+.footer-col.contact { grid-column: span 2; }
+
+@media (max-width: 1024px) {
+    .footer-grid { grid-template-columns: repeat(6, 1fr); }
+    .footer-col.about { grid-column: span 6; }
+    .footer-col.links { grid-column: span 3; }
+    .footer-col.categories { grid-column: span 3; }
+    .footer-col.contact { grid-column: span 6; }
+}
+
+@media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-col.about,
+    .footer-col.links,
+    .footer-col.categories,
+    .footer-col.contact { grid-column: auto; }
+}
+
+.footer-title {
+    color: #e2e8f0;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-brand { display: flex; align-items: center; gap: 0.75rem; margin: 0.5rem 0 0.75rem 0; }
+.brand-logo { width: 40px; height: 40px; border-radius: 8px; background:#1e293b; display:flex; align-items:center; justify-content:center; color:#94a3b8; }
+.brand-name { font-weight: 800; color:#f8fafc; letter-spacing: 0.06em; }
+.brand-sub { font-size: 0.85rem; color:#94a3b8; }
+
+.footer-desc { color:#94a3b8; margin: 0.5rem 0 0.5rem 0; }
+.footer-read-more { color:#93c5fd; text-decoration: underline; }
+.footer-read-more:hover { color:#bfdbfe; }
+
+.footer-list { list-style: none; display: grid; gap: 0.5rem; padding-left: 0; }
+.footer-list li { display: flex; align-items: center; gap: 0.5rem; color:#cbd5e1; }
+.footer-list a { color:#cbd5e1; text-decoration: none; }
+.footer-list a:hover { color:#ffffff; }
+
+.footer-bottom { border-top: 1px solid rgba(148, 163, 184, 0.2); margin-top: 2rem; padding-top: 1rem; text-align: center; color:#94a3b8; }
+
+/* Background Shapes */
+.bg-shapes {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(48px);
+}
+
+.shape-1 { top: -8rem; left: -8rem; width: 16rem; height: 16rem; background: rgba(99, 102, 241, 0.1); }
+.shape-2 { top: 25%; right: -8rem; width: 20rem; height: 20rem; background: rgba(59, 130, 246, 0.08); }
+.shape-3 { bottom: -8rem; left: 25%; width: 18rem; height: 18rem; background: rgba(165, 180, 252, 0.1); }
+.shape-4 { top: 5rem; left: 2rem; width: 4rem; height: 4rem; background: var(--brand-purple); opacity: 0.15; filter: none; }
+.shape-5 { bottom: 5rem; right: 2rem; width: 6rem; height: 6rem; background: var(--brand-blue); opacity: 0.1; filter: none; }
+.shape-6 { top: 50%; left: 4rem; width: 5rem; height: 5rem; background: var(--brand-purple-light); opacity: 0.2; filter: none; }
+.shape-7 { top: 8rem; right: 25%; width: 10rem; height: 5rem; border-radius: 50px; background: rgba(99, 102, 241, 0.08); transform: rotate(45deg); filter: blur(24px); }
+.shape-8 { bottom: 25%; left: 33%; width: 12rem; height: 6rem; border-radius: 50px; background: rgba(59, 130, 246, 0.08); transform: rotate(-12deg); filter: blur(24px); }
+
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    order: 2;
+}
+
+.sidebar-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+}
+
+.articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.article-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.article-item:hover {
+    background: var(--gray-50);
+}
+
+.article-thumb {
+    width: 4rem;
+    height: 3rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+}
+
+.article-info {
+    flex: 1;
+}
+
+.article-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    /* -webkit-line-clamp: 2; */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+}
+
+.article-item:hover .article-title {
+    color: var(--brand-purple);
+}
+
+.article-author {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    margin-bottom: 0.25rem;
+}
+
+.article-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--brand-purple);
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+}
+
+.topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.topic-tag {
+    display: inline-block;
+    font-size: 0.875rem;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.topic-tag:hover {
+    background: var(--brand-purple);
+    color: white;
+}
+
+.main-article {
+    flex: 1;
+    max-width: 100rem;
+    order: 1;
+    width: 100px;
+}
+
+.article-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 3rem;
+    padding: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.article-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.author-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 1px solid var(--gray-200);
+}
+
+.author-info {
+    flex: 1;
+    min-width: 200px;
+}
+
+.author-name-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.author-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.publish-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    flex-wrap: wrap;
+}
+
+.publish-date {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.social-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.social-btn {
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: color 0.2s;
+}
+
+.social-btn:hover {
+    color: var(--gray-700);
+}
+
+.article-main-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gray-900);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.article-image-section {
+    width: 100%;
+    height: auto;
+    max-height: 24rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.article-main-image {
+    width: 100%;
+    height: auto;
+    max-height: 24rem;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.image-caption {
+    font-size: 0.875rem;
+    color: var(--gray-500);
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.article-content {
+    color: var(--gray-700);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.article-content p,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content ul,
+.article-content table {
+    margin-bottom: 1.5rem;
+}
+
+.article-content h2 {
+    font-size: 1.5rem;
+    color: var(--gray-800);
+    border-bottom: 2px solid var(--brand-purple-light);
+    padding-bottom: 0.5rem;
+}
+
+.article-content h3 {
+    font-size: 1.2rem;
+    color: var(--gray-700);
+}
+
+.article-content h4 {
+    font-size: 1.1rem;
+    color: var(--gray-700);
+    font-weight: bold;
+}
+
+.article-content ul {
+    list-style-position: inside;
+    padding-left: 1rem;
+}
+
+/* Table Styles */
+.article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+}
+
+.article-content th, .article-content td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.article-content th, .article-content thead {
+    background-color: var(--gray-50);
+    font-weight: 600;
+    color: var(--gray-800);
+}
+
+.article-content tr:last-child td {
+    border-bottom: none;
+}
+.article-content tr:hover {
+    background-color: var(--gray-50);
+}
+
+.article-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.action-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+}
+</style>
+<body>
+    
+    <nav class="navbar">
+        <div class="nav-brand">POSTIFY</div>
+        <div class="nav-links">
+            <a href="govt_jobs.html" class="nav-link active">All Exams</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact </a>
+            <div class="mobile-menu">
+            <button class="search-btn-mobile">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+ 
+    <div class="main-container">
+      
+        <div class="bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+            <div class="shape shape-6"></div>
+            <div class="shape shape-7"></div>
+            <div class="shape shape-8"></div>
+        </div>
+
+        <div class="content-wrapper">
+         
+            <main class="main-article">
+                <article class="article-card">
+                    
+                    <div class="article-header">
+                        <img src="https://thozhilveedhi.com/wp-content/uploads/2020/06/ssc-logo.png" alt="SSC Logo" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name-section">
+                                <h3 class="author-name">Staff Selection Commission (SSC)</h3>
+                            </div>
+                            <div class="publish-info">
+                                <div class="publish-date">
+                                    <i class="far fa-calendar"></i>
+                                    <span>POSTED TUE, SEP 16 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-buttons">
+                            <button class="social-btn" onclick="shareToFacebook()"><i class="fab fa-facebook-f"></i></button>
+                            <button class="social-btn" onclick="shareToTwitter()"><i class="fab fa-twitter"></i></button>
+                            <button class="social-btn" onclick="shareToLinkedIn()"><i class="fab fa-linkedin-in"></i></button>
+                            <button class="social-btn" onclick="shareArticle()"><i class="fas fa-share-alt"></i></button>
+                        </div>
+                    </div>
+
+                    <h1 class="article-main-title">
+                        SSC CGL 2025 Exam: Complete Guide for 17,727 (Tentative) Vacancies
+                    </h1>
+
+                    <div class="article-image-section">
+                        <img src="CGL.png" alt="SSC CGL Examination" class="article-main-image">
+                        <p class="image-caption">
+                           Recruitment for Group 'B' and Group 'C' posts in various Ministries/Departments of the Government of India.
+                        </p>
+                    </div>
+
+                    <div class="article-content">
+                        <p>
+                            The Staff Selection Commission of India conducts the <strong>SSC Combined Graduate Level (CGL) exam annually</strong> to select candidates for various Group ‘B’ and Group ‘C’ posts in different Ministries/Departments/Organisations. This year, the exam is expected to be conducted for the recruitment of <strong>17,727 posts (tentative)</strong>.
+                        </p>
+
+                        <h2>SSC CGL 2025: Exam Summary</h2>
+                        <p>Here is a brief summary of the SSC CGL 2025 exam.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <tr><td>Exam Conducting Body</td><td>Staff Selection Commission (SSC)</td></tr>
+                                <tr><td>Post Name</td><td>Group ‘B’ and Group ‘C’ posts</td></tr>
+                                <tr><td>Ministries/Departments</td><td>Various Ministries/Departments/Organisations</td></tr>
+                                <tr><td>Vacancy</td><td>17,727 (Tentative)</td></tr>
+                                <tr><td>Job Category</td><td>Govt Jobs</td></tr>
+                                <tr><td>Exam Type</td><td>National Level Exam</td></tr>
+                                <tr><td>Application Dates</td><td>11th June to 10th July 2025</td></tr>
+                                <tr><td>Selection Process</td><td>Tier-I & Tier-II (Computer Based)</td></tr>
+                                <tr><td>Salary</td><td>Pay Level-4 (Rs. 25,500) to Pay Level-8 (Rs. 1,51,100)</td></tr>
+                                <tr><td>Job Location</td><td>Across India</td></tr>
+                                <tr><td>Official Website</td><td><a href="https://ssc.gov.in/" target="_blank" rel="Website">www.ssc.gov.in</a></td></tr>
+                            </table>
+                        </div>
+
+                        <h2>SSC CGL 2025: Important Dates</h2>
+                        <div class="table-responsive">
+                            <table>
+                           <thead><tr><th>Events</th><th>Dates</th></tr></thead>
+                           <tbody>
+                               <tr><td>SSC CGL Notification 2025</td><td>11th June 2025</td></tr>
+                               <tr><td>Apply Online Starts</td><td>11th June 2025</td></tr>
+                               <tr><td>Last Date to fill Application Form</td><td>10th July 2025</td></tr>
+                               <tr><td>SSC CGL Tier-I Exam Date 2025</td><td>September-October 2025</td></tr>
+                               <tr><td>SSC CGL Tier-II Exam Date 2025</td><td>December 2025</td></tr>
+                           </tbody>
+                        </table>
+                        </div>
+
+                        <h2>SSC CGL Vacancy 2025 (Tentative)</h2>
+                        <p>A total of <strong>17,727 tentative vacancies</strong> have been announced for various Group 'B' and 'C' posts. The final, post-wise vacancy distribution will be released by the commission on its official website in due course.
+                        </p>
+                        
+                        <h2>SSC CGL Eligibility Criteria</h2>
+                        <h3>Educational Qualification</h3>
+                        <p>Candidates applying for SSC CGL posts must have a <strong>Bachelor's Degree</strong> from a recognized University or equivalent. There are specific qualifications for certain posts like Assistant Audit Officer (AAO) and Junior Statistical Officer (JSO).</p>
+                        <h3>Age Limit (as on 01/08/2025)</h3>
+                        <p>The age limit varies for different posts, generally ranging from <strong>18 to 32 years</strong>. The specific age limits are detailed in the official notification. Age relaxation is applicable for reserved categories.</p>
+                         <div class="table-responsive">
+                            <table>
+                           <thead><tr><th>Category</th><th>Age Relaxation</th></tr></thead>
+                           <tbody>
+                               <tr><td>OBC</td><td>3 years</td></tr>
+                               <tr><td>ST/SC</td><td>5 years</td></tr>
+                               <tr><td>Ex-Servicemen</td><td>3 years</td></tr>
+                           </tbody>
+                        </table>
+                        </div>
+
+                        <h2>SSC CGL 2025 Selection Process</h2>
+                         <ul>
+                            <li><strong>Stage 1:</strong> Tier-I Examination (Computer Based)</li>
+                            <li><strong>Stage 2:</strong> Tier-II Examination (Computer Based)</li>
+                            <li><strong>Stage 3:</strong> Document Verification</li>
+                            <li><strong>Stage 4:</strong> Medical Examination (As required for specific posts)</li>
+                         </ul>
+                         
+                        <h2>SSC CGL 2025 Tier-I Exam Pattern</h2>
+                        <p>The online exam will have 100 questions for 200 marks, to be completed in 60 minutes. There is a negative marking of <strong>0.50 marks</strong> for each wrong answer.</p>
+                         <div class="table-responsive">
+                            <table>
+                           <thead><tr><th>Part</th><th>Subject</th><th>Questions</th><th>Marks</th></tr></thead>
+                           <tbody>
+                               <tr><td>A</td><td>General Intelligence & Reasoning</td><td>25</td><td>50</td></tr>
+                               <tr><td>B</td><td>General Awareness</td><td>25</td><td>50</td></tr>
+                               <tr><td>C</td><td>Quantitative Aptitude</td><td>25</td><td>50</td></tr>
+                               <tr><td>D</td><td>English Comprehension</td><td>25</td><td>50</td></tr>
+                               <tr><td><strong>Total</strong></td><td></td><td><strong>100</strong></td><td><strong>200</strong></td></tr>
+                           </tbody>
+                        </table>
+                        </div>
+                        
+                        <h2>SSC CGL 2025 Tier-II Exam Pattern</h2>
+                        <p>Tier-II will include conducting Paper-I, Paper-II & Paper-III in separate shifts/days. Paper-I is compulsory for all the posts. Paper-II will be only for those candidates who apply for the posts of Junior Statistical Officer (JSO). Paper-III will be only for those candidates who are shortlisted in Tier-I for Assistant Audit Officer/ Assistant Accounts Officer posts.</p>
+                        <h4>Paper-I (Compulsory for all posts)</h4>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Session</th>
+                                        <th>Section</th>
+                                        <th>Module</th>
+                                        <th>Subject</th>
+                                        <th>Questions</th>
+                                        <th>Marks</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="3">Session-I</td>
+                                        <td>Section-I</td>
+                                        <td>Module-I: Mathematical Abilities<br>Module-II: Reasoning & General Intelligence</td>
+                                        <td>30 + 30 = 60</td>
+                                        <td>60 x 3 = 180</td>
+                                        <td>1 hour</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section-II</td>
+                                        <td>Module-I: English Language & Comprehension<br>Module-II: General Awareness</td>
+                                        <td>45 + 25 = 70</td>
+                                        <td>70 x 3 = 210</td>
+                                        <td>1 hour</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section-III</td>
+                                        <td>Module-I: Computer Knowledge Test (Qualifying)</td>
+                                        <td>20</td>
+                                        <td>20 x 3 = 60</td>
+                                        <td>15 minutes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Session-II</td>
+                                        <td>Section-III</td>
+                                        <td>Module-II: Data Entry Speed Test (Qualifying)</td>
+                                        <td colspan="3">One Data Entry Task</td>
+                                        <td>15 minutes</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>Paper-II & Paper-III</h4>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Paper</th>
+                                        <th>Subject</th>
+                                        <th>Questions</th>
+                                        <th>Marks</th>
+                                        <th>Duration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Paper-II</td>
+                                        <td>Statistics (For JSO Post)</td>
+                                        <td>100</td>
+                                        <td>200</td>
+                                        <td>2 hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Paper-III</td>
+                                        <td>General Studies - Finance & Economics (For AAO Post)</td>
+                                        <td>100</td>
+                                        <td>200</td>
+                                        <td>2 hours</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><strong>Note:</strong> There will be a negative marking of 1 mark for each wrong answer in Section-I, II, and Module-I of Section-III of Paper-I and 0.50 marks for each wrong answer in Paper-II and Paper-III.</p>
+                        
+                        <h2>SSC CGL Tier-I Cutoff 2025 (Expected)</h2>
+                        <p>The Staff Selection Commission will release the Tier-I cutoff marks along with the result. The cutoff is the minimum score a candidate must achieve to be shortlisted for the Tier-II exam. Below is a table with the expected cutoff for different categories and posts.</p>
+                        <div class="table-responsive">
+                            <table>
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Cutoff (AAO)</th>
+                                    <th>Cutoff (JSO)</th>
+                                    <th>Cutoff (Other Posts)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>UR (General)</td>
+                                    <td>152 - 158</td>
+                                    <td>148 - 154</td>
+                                    <td>138 - 144</td>
+                                </tr>
+                                <tr>
+                                    <td>OBC</td>
+                                    <td>148 - 154</td>
+                                    <td>144 - 150</td>
+                                    <td>132 - 138</td>
+                                </tr>
+                                <tr>
+                                    <td>EWS</td>
+                                    <td>147 - 153</td>
+                                    <td>142 - 148</td>
+                                    <td>130 - 136</td>
+                                </tr>
+                                <tr>
+                                    <td>SC</td>
+                                    <td>135 - 141</td>
+                                    <td>130 - 136</td>
+                                    <td>115 - 121</td>
+                                </tr>
+                                <tr>
+                                    <td>ST</td>
+                                    <td>128 - 134</td>
+                                    <td>125 - 131</td>
+                                    <td>105 - 111</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+
+                        <h2>SSC CGL Tier-II Cutoff 2025 (Expected)</h2>
+<p>
+    After the Tier-II exam, the Staff Selection Commission releases category-wise cutoffs to shortlist candidates for the final merit list and subsequent document verification. The merit list is prepared based on the overall performance in Section-I and Section-II of Paper-I. The Computer Knowledge Test and Data Entry Speed Test are qualifying in nature.
+</p>
+<p>
+    The following table shows the expected cutoff range for various posts based on previous years' trends. Please note that the actual cutoff for high-demand posts (like Assistant in MEA, Inspector posts, etc.) may be higher.
+</p>
+<div class="table-responsive">
+    <table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Expected Cutoff Marks (Out of 390)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>UR (General)</td>
+            <td>305 - 320</td>
+        </tr>
+        <tr>
+            <td>OBC</td>
+            <td>290 - 305</td>
+        </tr>
+        <tr>
+            <td>EWS</td>
+            <td>285 - 300</td>
+        </tr>
+        <tr>
+            <td>SC</td>
+            <td>260 - 275</td>
+        </tr>
+        <tr>
+            <td>ST</td>
+            <td>245 - 260</td>
+        </tr>
+    </tbody>
+        </table>
+            <p><em><strong>Disclaimer:</strong> This is an expected cutoff range created for reference purposes only. The official      cutoff marks will be declared by the SSC on its website after the examination.</em></p>
+                       
+                    </div>
+
+                    <div class="article-actions">
+                        <div class="action-group">
+                            <button class="action-btn" onclick="likeArticle()">
+                                <i class="fas fa-thumbs-up"></i>
+                                <span class="like-count">245</span>
+                            </button>
+                            <button class="action-btn" onclick="openComments()">
+                                <i class="fas fa-comment"></i>
+                                <span>12</span>
+                            </button>
+                            <button class="action-btn" onclick="shareArticle()">
+                                <i class="fas fa-share-alt"></i>
+                                <span>Share</span>
+                            </button>
+                        </div>
+                        <button class="action-btn" onclick="saveArticle()">
+                            <i class="fas fa-bookmark"></i>
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col about">
+                    <h3 class="footer-title">About Postify</h3>
+                    <div class="footer-brand">
+                        <div class="brand-logo">⦿</div>
+                        <div class="brand-text">
+                            <div class="brand-name">Postify</div>
+                            <div class="brand-sub">Your Exam Portal</div>
+                        </div>
+                    </div>
+                    <p class="footer-desc">Providing the latest information on government job examinations across India. Your one-stop destination for exam notifications, syllabus, and results.</p>
+                </div>
+                <div class="footer-col links">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-list">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Categories</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col categories">
+                    <h3 class="footer-title">Main Categories</h3>
+                    <ul class="footer-list">
+                        <li>SSC</li>
+                        <li>Banking</li>
+                        <li>Railways</li>
+                        <li>Defence</li>
+                        <li>Civil Services</li>
+                    </ul>
+                </div>
+                 <div class="footer-col contact">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <ul class="footer-list contact-list">
+                        <li>📍 Karnal , Haryana </li>
+                        <li>📧 reportcenter43@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Copyright © 2025 Postify- All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+// Function to handle liking the article
+function likeArticle() {
+    const likeCountElement = document.querySelector('.like-count');
+    let currentLikes = parseInt(likeCountElement.textContent, 10);
+    currentLikes++;
+    likeCountElement.textContent = currentLikes;
+    alert('You liked the article!');
+}
+
+// Function to handle opening comments
+function openComments() {
+    alert('Opening comments section...');
+}
+
+// Function to handle saving/bookmarking the article
+function saveArticle() {
+    alert('Article saved!');
+}
+
+// Social Sharing Functions
+function shareToFacebook() {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+}
+
+function shareToTwitter() {
+    const url = encodeURIComponent(window.location.href);
+    const text = encodeURIComponent(document.title);
+    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+}
+
+function shareToLinkedIn() {
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+// Generic Share Function using Web Share API if available
+async function shareArticle() {
+    const shareData = {
+        title: document.title,
+        text: 'Check out this article about the SSC CGL 2025 Exam!',
+        url: window.location.href,
+    };
+
+    try {
+        if (navigator.share) {
+            await navigator.share(shareData);
+            console.log('Article shared successfully');
+        } else {
+            alert('Web Share API not supported. Use a specific social media button.');
+        }
+    } catch (err) {
+        console.error('Error sharing article:', err);
+    }
+}
+
+// Hamburger menu functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburgerBtn && navLinks) {
+        hamburgerBtn.addEventListener('click', () => {
+            // This is a placeholder for mobile menu logic.
+            // For a real app, you would toggle a class to show/hide the menu.
+            alert('Mobile menu clicked! You would typically show a dropdown menu here.');
+        });
+    }
+});
+    </script>
+</body>
+</html>
